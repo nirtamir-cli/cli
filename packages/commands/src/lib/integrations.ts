@@ -82,7 +82,7 @@ export const integrations = {
 			"prettier-plugin-packagejson",
 		],
 		scripts: {
-			"format": 'prettier "**/*" --write --ignore-unknown'
+			format: 'prettier "**/*" --write --ignore-unknown',
 		},
 		additionalConfig: async () => {
 			writeFile(
@@ -122,12 +122,9 @@ export const integrations = {
 		},
 	},
 	eslint: {
-		devInstalls: [
-			"eslint",
-			"eslint-config-nirtamir2",
-		],
+		devInstalls: ["eslint", "eslint-config-nirtamir2"],
 		scripts: {
-			"lint": "eslint --fix \"./src/**/*.{ts,tsx,js,jsx}\"",
+			lint: 'eslint --fix "./src/**/*.{ts,tsx,js,jsx}"',
 		},
 		additionalConfig: async () => {
 			writeFile(
@@ -164,6 +161,62 @@ export const integrations = {
   ],
   rules: {},
 };
+`,
+			);
+		},
+	},
+	ci: {
+		scripts: {
+			"ci": "pnpm run --parallel --aggregate-output \"/^(lint|format|type-check).*/\"",
+		}
+	},
+	typescript: {
+		devInstalls: [
+			"typescript",
+			"@tsconfig/strictest",
+		],
+		scripts: {
+			"type-check": "tsc --pretty --noEmit"
+		},
+		additionalConfig: async () => {
+			writeFile(
+				"tsconfig.json",
+				`{
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "downlevelIteration": true,
+    "plugins": [
+      {
+        "name": "next",
+      },
+    ],
+    "paths": {
+      "@icon/icon-name": ["./src/ui/icons/name.d.ts"],
+      "@/*": ["./src/*"],
+    },
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "reset.d.ts",
+    "./src/ui/icons/name.d.ts",
+    ".next/types/**/*.ts",
+  ],
+  "exclude": ["node_modules"],
+}
 `,
 			);
 		},
