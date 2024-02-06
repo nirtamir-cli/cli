@@ -8,6 +8,7 @@ import color from "picocolors";
 import { cancelable } from "@nirtamir-cli/ui";
 import { PluginOptions } from "@chialab/esbuild-plugin-meta-url";
 import { flushQueue } from "@nirtamir-cli/utils/updates";
+import { readFile } from "fs/promises";
 
 // All the integrations/packages that we support
 export type Supported = keyof typeof integrations;
@@ -15,6 +16,7 @@ export type Supported = keyof typeof integrations;
 export type IntegrationsValue = {
 	pluginOptions?: PluginOptions;
 	installs?: string[];
+	scripts?: Record<string, string>;
 	devInstalls?: string[];
 	additionalConfig?: () => Promise<void>;
 	postInstall?: () => Promise<void>;
@@ -79,6 +81,9 @@ export const integrations = {
 			"@trivago/prettier-plugin-sort-imports",
 			"prettier-plugin-packagejson",
 		],
+		scripts: {
+			"format": 'prettier "**/*" --write --ignore-unknown'
+		},
 		additionalConfig: async () => {
 			writeFile(
 				".prettierrc.mjs",

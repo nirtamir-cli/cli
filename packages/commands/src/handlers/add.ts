@@ -17,6 +17,7 @@ import {
 	queueUpdate,
 	summarizeUpdates,
 	flushDevPackageUpdates,
+	flushScriptAdditions,
 } from "@nirtamir-cli/utils/updates";
 const handleAutocompleteAdd = async () => {
 	const supportedIntegrations = (Object.keys(integrations) as Supported[]).map((value) => ({ label: value, value }));
@@ -108,6 +109,7 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		const config = configs[i];
 		config.installs?.forEach((p) => queueUpdate({ type: "package", name: p }));
 		config.devInstalls?.forEach((p) => queueUpdate({ type: "dev-package", name: p }));
+		Object.entries(config.scripts ?? {}).forEach(([name, content]) => queueUpdate({ type: "script", name, content }));
 	}
 	// Queue primitives
 	for (const primitive of await transformPrimitives(possiblePrimitives)) {
@@ -158,9 +160,11 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		},
 	});
 	if (UPDATESQUEUE.length === 0) return;
-	const { fileUpdates, packageUpdates, commandUpdates, devPackageUpdates } = summarizeUpdates();
+	const { fileUpdates, packageUpdates, commandUpdates, devPackageUpdates, scriptsUpdates } = summarizeUpdates();
 	// Inspired by Qwik's CLI
 	if (fileUpdates.length) p.log.message([`${color.cyan("Modify")}`, ...fileUpdates.map((f) => `  - ${f}`)].join("\n"));
+	if (scriptsUpdates.length)
+		p.log.message([`${color.cyan("Adding Script")}`, ...scriptsUpdates.map((f) => `  - ${f}`)].join("\n"));
 	if (packageUpdates.length)
 		p.log.message([`${color.cyan("Install")}`, ...packageUpdates.map((p) => `  - ${p}`)].join("\n"));
 	if (packageUpdates.length)
@@ -177,6 +181,7 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		fn: flushDevPackageUpdates,
 	});
 	await spinnerify({ startText: "Running setup commands", finishText: "Setup commands ran", fn: flushCommandUpdates });
+	await spinnerify({ startText: "Adding scripts", finishText: "Scripts Added", fn: flushScriptAdditions });
 	clearQueue();
 	const postInstalls = configs.filter((c) => c.postInstall);
 	if (postInstalls.length === 0) return;

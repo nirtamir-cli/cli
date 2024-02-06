@@ -1,6 +1,7 @@
 import { open, writeFile } from "fs/promises";
 import { $ } from "execa";
 import { detectPackageManager, getInstallCommand } from "../package-manager";
+import { readFile } from "../fs";
 declare global {
 	var UPDATESQUEUE: Update[] | undefined;
 }
@@ -10,14 +11,16 @@ globalThis.UPDATESQUEUE = UPDATESQUEUE;
 type PackageUpdate = { type: "package"; name: string };
 type DevPackageUpdate = { type: "dev-package"; name: string };
 type CommandUpdate = { type: "command"; name: string };
+type ScriptUpdate = { type: "script"; name: string; content: string };
 type FileUpdate = { type: "file"; name: string; contents: string; checked: boolean };
 // Don't bother explicitly handling plugin updates, since they're just a file update
-export type Update = PackageUpdate | CommandUpdate | FileUpdate | DevPackageUpdate;
+export type Update = PackageUpdate | CommandUpdate | FileUpdate | DevPackageUpdate | ScriptUpdate;
 type UpdateSummary = {
 	packageUpdates: string[];
 	devPackageUpdates: string[];
 	commandUpdates: string[];
 	fileUpdates: string[];
+	scriptsUpdates: string[];
 };
 
 export const clearQueue = () => {
@@ -28,7 +31,8 @@ export const summarizeUpdates = (): UpdateSummary => {
 	const packageUpdates = UPDATESQUEUE.filter((u) => u.type === "package").map((s) => s.name);
 	const devPackageUpdates = UPDATESQUEUE.filter((u) => u.type === "dev-package").map((s) => s.name);
 	const commandUpdates = UPDATESQUEUE.filter((u) => u.type === "command").map((s) => s.name);
-	return { devPackageUpdates, packageUpdates, commandUpdates, fileUpdates };
+	const scriptsUpdates = UPDATESQUEUE.filter((u) => u.type === "script").map((s) => s.name);
+	return { devPackageUpdates, packageUpdates, commandUpdates, fileUpdates, scriptsUpdates };
 };
 export const queueUpdate = (update: Update) => {
 	UPDATESQUEUE.push(update);
@@ -77,7 +81,7 @@ export const flushDevPackageUpdates = async () => {
 	const instlCmd = getInstallCommand(pM);
 	const devFlag = "-D";
 	for (const update of packageUpdates) {
-		await $ `${pM} ${instlCmd} ${devFlag} ${update.name}`;
+		await $`${pM} ${instlCmd} ${devFlag} ${update.name}`;
 	}
 };
 
@@ -87,11 +91,32 @@ export const flushCommandUpdates = async () => {
 		await $`${update.name}`;
 	}
 };
+
+export const flushScriptAdditions = async () => {
+	const scriptUpdates = UPDATESQUEUE.filter((u) => u.type === "script") as ScriptUpdate[];
+
+	const packageJsonFileName = "package.json";
+	const packageJsonStr = (await readFile(packageJsonFileName)).toString();
+	const packageJson = JSON.parse(packageJsonStr);
+
+	const scripts = packageJson["scripts"] ?? {};
+	if (scriptUpdates.length === 0) {
+		return;
+	}
+	for (const update of scriptUpdates) {
+		scripts[update.name] = update.content;
+		packageJson["scripts"] = scripts;
+	}
+
+	await writeFile(packageJsonFileName, JSON.stringify(packageJson, null, 2));
+};
+
 /**
  * Flushes every operation in the queue
  */
 export const flushQueue = async () => {
 	await flushFileUpdates();
+	await flushScriptAdditions();
 	await flushPackageUpdates();
 	await flushCommandUpdates();
 	clearQueue();
