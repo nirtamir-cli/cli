@@ -128,23 +128,23 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 	// 	},
 	// });
 
-	p.log.info("Preparing post install steps for integrations");
-	let projectRoot = await getRootFile();
-	setRootFile(projectRoot);
-	if (!fileExists(projectRoot)) {
-		p.log.error(color.red(`Can't find root file \`${projectRoot.split("/")[1]}\`.`));
-		await cancelable(
-			p.text({
-				message: `Type path to root: `,
-				validate(value) {
-					if (!value.length) return `Path can not be empty`;
-					const path = validateFilePath(value, ["root.tsx", "index.tsx"]);
-					if (!path) return `File at \`${value}\` not found. Please try again`;
-					else setRootFile(path);
-				},
-			}),
-		);
-	}
+	// p.log.info("Preparing post install steps for integrations");
+	// let projectRoot = await getRootFile();
+	// setRootFile(projectRoot);
+	// if (!fileExists(projectRoot)) {
+	// 	p.log.error(color.red(`Can't find root file \`${projectRoot.split("/")[1]}\`.`));
+	// 	await cancelable(
+	// 		p.text({
+	// 			message: `Type path to root: `,
+	// 			validate(value) {
+	// 				if (!value.length) return `Path can not be empty`;
+	// 				const path = validateFilePath(value, ["root.tsx", "index.tsx"]);
+	// 				if (!path) return `File at \`${value}\` not found. Please try again`;
+	// 				else setRootFile(path);
+	// 			},
+	// 		}),
+	// 	);
+	// }
 	// Run our additional configs
 	await spinnerify({
 		startText: "Running additional config steps",
