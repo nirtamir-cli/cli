@@ -1,22 +1,22 @@
 {
-	"name": "@solid-cli/create-solid",
+	"name": "@nirtamir-cli/create-app",
 	"version": "0.0.16",
-	"description": "A stripped down Solid CLI just for creating new projects",
-	"author": "Thomas Beer & Rahul Batra",
+	"description": "A stripped down Nir Tamir's CLI just for creating new projects",
+	"author": "Nir Tamir",
 	"license": "MIT",
-	"homepage": "https://solid-cli.netlify.app",
+	"homepage": "https://nirtamir-cli.netlify.app",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/solidjs-community/solid-cli"
+		"url": "https://github.com/nirtamir2/nirtamir-cli"
 	},
 	"keywords": [
-		"solidjs",
-		"solid",
+		"nirtamir",
+		"nirtamir2",
 		"cli"
 	],
 	"main": "dist/index.mjs",
 	"bin": {
-		"create-solid": "./dist/index.mjs"
+		"create-app": "./dist/index.mjs"
 	},
 	"files": [
 		"dist"
@@ -26,7 +26,7 @@
 		"build": "tsc && tsup"
 	},
 	"devDependencies": {
-		"@solid-cli/commands": "workspace:*",
+		"@nirtamir-cli/commands": "workspace:*",
 		"jiti": "^1.21.0",
 		"tsup": "^8.0.1",
 		"typescript": "^5.3.3",

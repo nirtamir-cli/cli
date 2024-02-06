@@ -7,8 +7,8 @@
 
 # Solid CLI
 
-[![Build and Test](https://github.com/solidjs-community/solid-cli/actions/workflows/tests.yml/badge.svg)](https://github.com/solidjs-community/solid-cli/actions/workflows/tests.yml)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5233ac74-3f53-4c90-b95d-25b528b931a1/deploy-status)](https://app.netlify.com/sites/solid-cli/deploys)
+[![Build and Test](https://github.com/nirtamir2/nirtamir-cli/actions/workflows/tests.yml/badge.svg)](https://github.com/nirtamir2/nirtamir-cli/actions/workflows/tests.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5233ac74-3f53-4c90-b95d-25b528b931a1/deploy-status)](https://app.netlify.com/sites/nirtamir-cli/deploys)
 
 A custom-built CLI for creating and managing SolidJS apps and projects.
 

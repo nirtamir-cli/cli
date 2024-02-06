@@ -1,6 +1,6 @@
 import { tmpdir } from "../paths";
 import type { Option } from "../util-types";
-import { createSignal } from "@solid-cli/reactivity";
+import { createSignal } from "@nirtamir-cli/reactivity";
 import { readFile, writeFile } from "fs/promises";
 export const [primitives, setPrimitives] = createSignal<Option[]>([]);
 const fetchPrimitives = async () => {

@@ -1,8 +1,8 @@
-import { writeFile, readFile } from "@solid-cli/utils/fs";
-import { transformPlugins } from "@solid-cli/utils/transform";
-import { isSolidStart } from "@solid-cli/utils";
+import { writeFile, readFile } from "@nirtamir-cli/utils/fs";
+import { transformPlugins } from "@nirtamir-cli/utils/transform";
+import { isSolidStart } from "@nirtamir-cli/utils";
 import * as p from "@clack/prompts";
-import { cancelable } from "@solid-cli/ui";
+import { cancelable } from "@nirtamir-cli/ui";
 
 export const supportedModes = ["csr", "ssr", "ssg"] as const;
 type SupportedModes = (typeof supportedModes)[number];

@@ -1,6 +1,6 @@
-import { createEffect, createMemo, createSignal } from "@solid-cli/reactivity";
+import { createEffect, createMemo, createSignal } from "@nirtamir-cli/reactivity";
 import { SL, SupportedLanguages, TemplateFunction, Translations } from "./types";
-import { on } from "@solid-cli/reactivity";
+import { on } from "@nirtamir-cli/reactivity";
 import { log } from "@clack/prompts";
 import { config, setConfig } from "../config";
 export const [locale, setLocale] = createSignal<SL | null>(null);

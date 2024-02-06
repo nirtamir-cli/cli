@@ -1,4 +1,4 @@
-# @solid-cli/core
+# nirtamir-cli/core
 
 The main package for the SolidJS CLI tool.
 
@@ -7,7 +7,7 @@ The main package for the SolidJS CLI tool.
 Run the following command to install the CLI tool globally:
 
 ```bash
-npm i -g @solid-cli/core
+npm i -g nirtamir-cli/core
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ For more help, try running `solid <subcommand> --help`
 
 ## Documentation
 
-Visit our [official documentation](https://solid-cli.netlify.app/)
+Visit our [official documentation](https://nirtamir-cli.netlify.app/)
 
 ## Support
 
@@ -45,4 +45,4 @@ Reach out to us on the official [SolidJS discord](https://discord.gg/solidjs)
 
 ## Contributing
 
-If you would like to contribute or keep up to date with the package, come join the effort over on [our GitHub](https://github.com/solidjs-community/solid-cli)
+If you would like to contribute or keep up to date with the package, come join the effort over on [our GitHub](https://github.com/nirtamir2/nirtamir-cli)

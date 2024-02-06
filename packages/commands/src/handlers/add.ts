@@ -1,13 +1,13 @@
-import { autocomplete } from "@solid-cli/ui";
-import { S_BAR, cancelable, spinnerify } from "@solid-cli/ui";
+import { autocomplete } from "@nirtamir-cli/ui";
+import { S_BAR, cancelable, spinnerify } from "@nirtamir-cli/ui";
 import { Integrations, Supported, integrations, setRootFile } from "../lib/integrations";
 import * as p from "@clack/prompts";
 import color from "picocolors";
-import { primitives, loadPrimitives } from "@solid-cli/utils/primitives";
-import { t } from "@solid-cli/utils";
+import { primitives, loadPrimitives } from "@nirtamir-cli/utils/primitives";
+import { t } from "@nirtamir-cli/utils";
 import { fileExists, getRootFile, getViteConfig, validateFilePath } from "../lib/utils/helpers";
-import { writeFile, readFile } from "@solid-cli/utils/fs";
-import { transformPlugins, type PluginOptions } from "@solid-cli/utils/transform";
+import { writeFile, readFile } from "@nirtamir-cli/utils/fs";
+import { transformPlugins, type PluginOptions } from "@nirtamir-cli/utils/transform";
 import {
 	UPDATESQUEUE,
 	clearQueue,
@@ -16,7 +16,7 @@ import {
 	flushPackageUpdates,
 	queueUpdate,
 	summarizeUpdates,
-} from "@solid-cli/utils/updates";
+} from "@nirtamir-cli/utils/updates";
 const handleAutocompleteAdd = async () => {
 	const supportedIntegrations = (Object.keys(integrations) as Supported[]).map((value) => ({ label: value, value }));
 	const opts = () => [...supportedIntegrations, ...primitives()];

@@ -1,7 +1,7 @@
-import { readFile, writeFile } from "@solid-cli/utils/fs";
-import { transformPlugins } from "@solid-cli/utils/transform";
+import { readFile, writeFile } from "@nirtamir-cli/utils/fs";
+import { transformPlugins } from "@nirtamir-cli/utils/transform";
 import * as p from "@clack/prompts";
-import { cancelable } from "@solid-cli/ui";
+import { cancelable } from "@nirtamir-cli/ui";
 
 export const supportedAdapters = [
 	"aws",

@@ -2,13 +2,13 @@ import { readFile, writeFile } from "fs/promises";
 import { homedir } from "../paths";
 import { join } from "path";
 import { parse, stringify } from "smol-toml";
-import { createSignal } from "@solid-cli/reactivity";
+import { createSignal } from "@nirtamir-cli/reactivity";
 export const PossibleFields = ["lang"] as const;
 const defaultConfig = {
 	lang: Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0],
 } as Record<string, any>;
 type Field = (typeof PossibleFields)[number];
-const configPath: string = join(homedir(), "/solid-cli.config.toml");
+const configPath: string = join(homedir(), "/nirtamir-cli.config.toml");
 export const [config, setConfig] = createSignal(defaultConfig);
 export const readConfig = async () => {
 	try {

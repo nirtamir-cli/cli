@@ -3,9 +3,9 @@ import { Prompt } from "@clack/core";
 import { TextOptions } from "@clack/prompts";
 import { S_CHECKBOX_ACTIVE, S_CHECKBOX_SELECTED, S_CHECKBOX_INACTIVE, S_BAR, S_BAR_END, box, S_INFO } from "./utils";
 import color from "picocolors";
-import { createEffect } from "@solid-cli/reactivity";
-import { t } from "@solid-cli/utils";
-import { Option } from "@solid-cli/utils/util-types";
+import { createEffect } from "@nirtamir-cli/reactivity";
+import { t } from "@nirtamir-cli/utils";
+import { Option } from "@nirtamir-cli/utils/util-types";
 
 const buildRegex = (str: string) => {
 	let s = "";

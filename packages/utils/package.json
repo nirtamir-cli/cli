@@ -1,12 +1,12 @@
 {
-	"name": "@solid-cli/utils",
+	"name": "@nirtamir-cli/utils",
 	"version": "0.0.10",
 	"description": "A collection of utilities for the Solid CLI",
 	"license": "MIT",
-	"homepage": "https://solid-cli.netlify.app",
+	"homepage": "https://nirtamir-cli.netlify.app",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/solidjs-community/solid-cli"
+		"url": "https://github.com/nirtamir2/nirtamir-cli"
 	},
 	"files": [
 		"dist",
@@ -75,7 +75,7 @@
 	"dependencies": {
 		"@clack/core": "0.3.3",
 		"@clack/prompts": "0.7.0",
-		"@solid-cli/reactivity": "workspace:*",
+		"@nirtamir-cli/reactivity": "workspace:*",
 		"@swc/core": "^1.4.0",
 		"cmd-ts": "^0.13.0",
 		"execa": "^8.0.1",

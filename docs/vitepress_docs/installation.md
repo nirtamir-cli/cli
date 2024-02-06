@@ -3,7 +3,7 @@
 The CLI can be installed locally to your project via
 
 ```sh
-npm install @solid-cli/core
+npm install nirtamir-cli/core
 ```
 
 Or installed globally:
@@ -12,19 +12,19 @@ Or installed globally:
 In order to install global packages on Unix based systems you will need to grant npm special system permissions using the `sudo` command, suffixed by the command you would like to run.
 
 ```sh
-sudo npm install -g @solid-cli/core
+sudo npm install -g nirtamir-cli/core
 ```
 
 ### Windows
 
 ```sh
-npm install -g @solid-cli/core
+npm install -g nirtamir-cli/core
 ```
 
 It can then be invoked via the keyword `solid`, and the help page can be displayed with `solid --help`
 
 ```txt
-┌   Solid-CLI
+┌   nirtamir-cli
 solid <subcommand>
 
 where <subcommand> can be one of:

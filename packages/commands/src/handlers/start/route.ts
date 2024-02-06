@@ -1,6 +1,6 @@
 import * as p from "@clack/prompts";
-import { isSolidStart, createRoute } from "@solid-cli/utils";
-import { cancelable, spinnerify } from "@solid-cli/ui";
+import { isSolidStart, createRoute } from "@nirtamir-cli/utils";
+import { cancelable, spinnerify } from "@nirtamir-cli/ui";
 const handleAutocompleteRoute = async () => {
 	const path = await cancelable(
 		p.text({

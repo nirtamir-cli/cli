@@ -1,13 +1,13 @@
 {
-	"name": "@solid-cli/swc-plugin-solid-cli",
+	"name": "@nirtamir-cli/swc-plugin-nirtamir-cli",
 	"version": "0.0.3",
 	"description": "An SWC plugin for transforming a project's vite config",
 	"author": "Thomas Beer",
 	"license": "MIT",
-	"homepage": "https://solid-cli.netlify.app",
+	"homepage": "https://nirtamir-cli.netlify.app",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/solidjs-community/solid-cli"
+		"url": "https://github.com/nirtamir2/nirtamir-cli"
 	},
 	"keywords": [
 		"swc-plugin"

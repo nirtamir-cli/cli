@@ -2,12 +2,12 @@
 import { run, subcommands } from "cmd-ts";
 import * as p from "@clack/prompts";
 import color from "picocolors";
-import { t, setLocale, getField } from "@solid-cli/utils";
+import { t, setLocale, getField } from "@nirtamir-cli/utils";
 import { name, version } from "../package.json";
-import { readConfig } from "@solid-cli/utils";
+import { readConfig } from "@nirtamir-cli/utils";
 import loadCommands from "./plugins/plugins_entry";
 import updater from "tiny-updater";
-import { createAsync } from "@solid-cli/reactivity";
+import { createAsync } from "@nirtamir-cli/reactivity";
 import {
 	handleAdapter,
 	handleAdd,
@@ -16,7 +16,7 @@ import {
 	handleMode,
 	handleNew,
 	handleRoute,
-} from "@solid-cli/commands";
+} from "@nirtamir-cli/commands";
 const possibleActions = () =>
 	[
 		{ value: "add", label: t.ACTION_ADD, hint: "solid add ..." },
@@ -84,7 +84,7 @@ const provideSuggestions = async () => {
 };
 
 const main = async () => {
-	p.intro(`\n${color.bgCyan(color.black(" Solid-CLI "))}`);
+	p.intro(`\n${color.bgCyan(color.black(" nirtamir-cli "))}`);
 	await readConfig();
 	const needsUpdate = createAsync(async () => await updater({ name, version, ttl: 86_400_000 }));
 	setLocale(getField("lang"));

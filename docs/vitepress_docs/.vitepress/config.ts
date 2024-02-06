@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 import { SearchPlugin } from "vitepress-plugin-search";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	title: "Solid-CLI Docs",
+	title: "nirtamir-cli Docs",
 	description: "Documentation for the Solid CLI",
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
@@ -26,7 +26,7 @@ export default defineConfig({
 		socialLinks: [
 			{
 				icon: "github",
-				link: "https://github.com/solidjs-community/solid-cli",
+				link: "https://github.com/nirtamir2/nirtamir-cli",
 			},
 		],
 	},

@@ -1,6 +1,6 @@
-import { isSolidStart, createData } from "@solid-cli/utils";
+import { isSolidStart, createData } from "@nirtamir-cli/utils";
 import * as p from "@clack/prompts";
-import { cancelable, spinnerify } from "@solid-cli/ui";
+import { cancelable, spinnerify } from "@nirtamir-cli/ui";
 
 const handleAutocompleteData = async () => {
 	const path = await cancelable(

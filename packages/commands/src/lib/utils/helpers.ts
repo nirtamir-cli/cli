@@ -1,8 +1,8 @@
 import { existsSync, lstatSync, readdirSync } from "fs";
-import { isSolidStart } from "@solid-cli/utils";
+import { isSolidStart } from "@nirtamir-cli/utils";
 import { join, resolve } from "path";
 import { $ } from "execa";
-import { cancelable } from "@solid-cli/ui";
+import { cancelable } from "@nirtamir-cli/ui";
 import * as p from "@clack/prompts";
 import color from "picocolors";
 

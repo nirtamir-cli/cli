@@ -35,8 +35,8 @@ vi.mock("@clack/prompts", async () => {
 	};
 });
 
-vi.mock("@solid-cli/utils/updates", async () => {
-	const actual: object = await vi.importActual("@solid-cli/utils/updates");
+vi.mock("@nirtamir-cli/utils/updates", async () => {
+	const actual: object = await vi.importActual("@nirtamir-cli/utils/updates");
 	return {
 		...actual,
 		clearQueue: async () => {},

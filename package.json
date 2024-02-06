@@ -1,13 +1,13 @@
 {
-	"name": "solid-cli",
+	"name": "nirtamir-cli",
 	"private": true,
 	"version": "0.0.1",
-	"description": "A CLI for making the SolidJS development experience easier, faster, and less error prone.",
+	"description": "A CLI for making the Nir Tamir's development experience easier, faster, and less error prone.",
 	"license": "MIT",
-	"homepage": "https://solid-cli.netlify.app",
+	"homepage": "https://nirtamir-cli.netlify.app",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/solidjs-community/solid-cli"
+		"url": "https://github.com/nirtamir2/nirtamir-cli"
 	},
 	"scripts": {
 		"test": "vitest",
@@ -24,10 +24,7 @@
 	},
 	"contributors": [
 		{
-			"name": "Thomas Beer"
-		},
-		{
-			"name": "Rahul Batra"
+			"name": "Nir Tamir"
 		}
 	],
 	"workspaces": [

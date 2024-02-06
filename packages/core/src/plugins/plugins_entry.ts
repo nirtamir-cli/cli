@@ -1,5 +1,5 @@
 import { join } from "path";
-import { config } from "@solid-cli/utils";
+import { config } from "@nirtamir-cli/utils";
 import defaultCommands from "../commands";
 
 const resolveImport = async (packagePath: string) => {

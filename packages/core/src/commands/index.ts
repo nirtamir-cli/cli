@@ -1,12 +1,12 @@
-import { openInBrowser } from "@solid-cli/utils";
+import { openInBrowser } from "@nirtamir-cli/utils";
 import { startCommands } from "./start";
 import * as p from "@clack/prompts";
 import { boolean, command, flag, optional, positional, restPositionals, string } from "cmd-ts";
-import { oneOf } from "@solid-cli/utils";
-import { cancelable } from "@solid-cli/ui";
-import { PossibleFields, setField, t } from "@solid-cli/utils";
-import { spinnerify } from "@solid-cli/ui";
-import { handleNew, handleAdd } from "@solid-cli/commands";
+import { oneOf } from "@nirtamir-cli/utils";
+import { cancelable } from "@nirtamir-cli/ui";
+import { PossibleFields, setField, t } from "@nirtamir-cli/utils";
+import { spinnerify } from "@nirtamir-cli/ui";
+import { handleNew, handleAdd } from "@nirtamir-cli/commands";
 const add = command({
 	name: "add",
 	description: t.ADD_DESC,

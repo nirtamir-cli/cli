@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Solid-CLI Docs"
+  name: "nirtamir-cli Docs"
   text: "Documentation for the Solid CLI"
   tagline: A solid cli
   actions:

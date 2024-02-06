@@ -1,9 +1,9 @@
 import * as p from "@clack/prompts";
-import { openInBrowser } from "@solid-cli/utils";
-import { cancelable, spinnerify } from "@solid-cli/ui";
-import { t } from "@solid-cli/utils";
-import { insertAtEnd, readFileToString } from "@solid-cli/utils/fs";
-import { flushQueue } from "@solid-cli/utils/updates";
+import { openInBrowser } from "@nirtamir-cli/utils";
+import { cancelable, spinnerify } from "@nirtamir-cli/ui";
+import { t } from "@nirtamir-cli/utils";
+import { insertAtEnd, readFileToString } from "@nirtamir-cli/utils/fs";
+import { flushQueue } from "@nirtamir-cli/utils/updates";
 import { rm } from "fs/promises";
 import { basename, join, resolve } from "path";
 import { Dirent, copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "fs";
@@ -60,7 +60,7 @@ type AllSupported = (typeof localSupported)[number] | (typeof stackblitzSupporte
 const modifyReadme = async (name: string) => {
 	await insertAtEnd(
 		`${name}/README.md`,
-		"\n## This project was created with the [Solid CLI](https://solid-cli.netlify.app)\n",
+		"\n## This project was created with the [Solid CLI](https://nirtamir-cli.netlify.app)\n",
 	);
 	await flushQueue();
 };

@@ -1,13 +1,13 @@
-import { insertAfter, insertAtBeginning } from "@solid-cli/utils/fs";
+import { insertAfter, insertAtBeginning } from "@nirtamir-cli/utils/fs";
 import { fileExists, validateFilePath } from "./utils/helpers";
 import { $ } from "execa";
-import { getRunnerCommand, detectPackageManager } from "@solid-cli/utils/package-manager";
-import { createSignal } from "@solid-cli/reactivity";
+import { getRunnerCommand, detectPackageManager } from "@nirtamir-cli/utils/package-manager";
+import { createSignal } from "@nirtamir-cli/reactivity";
 import * as p from "@clack/prompts";
 import color from "picocolors";
-import { cancelable } from "@solid-cli/ui";
+import { cancelable } from "@nirtamir-cli/ui";
 import { PluginOptions } from "@chialab/esbuild-plugin-meta-url";
-import { flushQueue } from "@solid-cli/utils/updates";
+import { flushQueue } from "@nirtamir-cli/utils/updates";
 
 // All the integrations/packages that we support
 export type Supported = keyof typeof integrations;

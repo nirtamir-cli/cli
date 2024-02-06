@@ -1,11 +1,11 @@
 {
-	"name": "@solid-cli/ui",
+	"name": "@nirtamir-cli/ui",
 	"version": "0.0.9",
 	"license": "MIT",
-	"homepage": "https://solid-cli.netlify.app",
+	"homepage": "https://nirtamir-cli.netlify.app",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/solidjs-community/solid-cli"
+		"url": "https://github.com/nirtamir2/nirtamir-cli"
 	},
 	"files": [
 		"dist",
@@ -38,7 +38,7 @@
 		"@clack/core": "0.3.3",
 		"@clack/prompts": "0.7.0",
 		"picocolors": "^1.0.0",
-		"@solid-cli/reactivity": "workspace:*",
-		"@solid-cli/utils": "workspace:*"
+		"@nirtamir-cli/reactivity": "workspace:*",
+		"@nirtamir-cli/utils": "workspace:*"
 	}
 }

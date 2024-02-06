@@ -1,6 +1,6 @@
 import { command, flag, optional, positional, string, subcommands } from "cmd-ts";
-import { oneOf } from "@solid-cli/utils";
-import { t } from "@solid-cli/utils";
+import { oneOf } from "@nirtamir-cli/utils";
+import { t } from "@nirtamir-cli/utils";
 import {
 	handleAdapter,
 	handleApi,
@@ -9,7 +9,7 @@ import {
 	handleRoute,
 	supportedAdapters,
 	supportedModes,
-} from "@solid-cli/commands";
+} from "@nirtamir-cli/commands";
 
 const mode = command({
 	name: "mode",

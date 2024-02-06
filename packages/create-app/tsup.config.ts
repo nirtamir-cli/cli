@@ -8,7 +8,7 @@ export default defineConfig({
 	bundle: true,
 	sourcemap: false,
 	clean: true,
-	noExternal: ["@solid-cli/commands"],
+	noExternal: ["@nirtamir-cli/commands"],
 	treeshake: true,
 	minify: true,
 	banner: {

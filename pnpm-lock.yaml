@@ -32,13 +32,13 @@ importers:
       '@clack/prompts':
         specifier: 0.7.0
         version: 0.7.0
-      '@solid-cli/reactivity':
+      '@nirtamir-cli/reactivity':
         specifier: workspace:*
         version: link:../reactivity
-      '@solid-cli/ui':
+      '@nirtamir-cli/ui':
         specifier: workspace:*
         version: link:../ui
-      '@solid-cli/utils':
+      '@nirtamir-cli/utils':
         specifier: workspace:*
         version: link:../utils
       execa:
@@ -75,19 +75,19 @@ importers:
       '@clack/prompts':
         specifier: 0.7.0
         version: 0.7.0
-      '@solid-cli/commands':
+      '@nirtamir-cli/commands':
         specifier: workspace:*
         version: link:../commands
-      '@solid-cli/reactivity':
+      '@nirtamir-cli/reactivity':
         specifier: workspace:*
         version: link:../reactivity
-      '@solid-cli/swc-plugin-solid-cli':
+      '@nirtamir-cli/swc-plugin-nirtamir-cli':
         specifier: workspace:*
         version: link:../swc-plugin-solid-cli
-      '@solid-cli/ui':
+      '@nirtamir-cli/ui':
         specifier: workspace:*
         version: link:../ui
-      '@solid-cli/utils':
+      '@nirtamir-cli/utils':
         specifier: workspace:*
         version: link:../utils
       '@swc/core':
@@ -125,12 +125,12 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  packages/create-solid:
+  packages/create-app:
     devDependencies:
       '@clack/prompts':
         specifier: 0.7.0
         version: 0.7.0
-      '@solid-cli/commands':
+      '@nirtamir-cli/commands':
         specifier: workspace:*
         version: link:../commands
       jiti:
@@ -165,10 +165,10 @@ importers:
       '@clack/prompts':
         specifier: 0.7.0
         version: 0.7.0
-      '@solid-cli/reactivity':
+      '@nirtamir-cli/reactivity':
         specifier: workspace:*
         version: link:../reactivity
-      '@solid-cli/utils':
+      '@nirtamir-cli/utils':
         specifier: workspace:*
         version: link:../utils
       picocolors:
@@ -193,7 +193,7 @@ importers:
       '@clack/prompts':
         specifier: 0.7.0
         version: 0.7.0
-      '@solid-cli/reactivity':
+      '@nirtamir-cli/reactivity':
         specifier: workspace:*
         version: link:../reactivity
       '@swc/core':

@@ -9,7 +9,7 @@ export const transformPlugins = async (
 	config: Config,
 	force_transform = false,
 	merge_configs = false,
-	wasm_path = fileURLToPath(new URL("../../../swc-plugin-solid-cli/output/swc_plugin_solid_cli.wasm", import.meta.url)),
+	wasm_path = fileURLToPath(new URL("../../../swc-plugin-nirtamir-cli/output/swc_plugin_solid_cli.wasm", import.meta.url)),
 ) => {
 	const res = await transform(config.contents, {
 		filename: config.name,
