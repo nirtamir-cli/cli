@@ -1,0 +1,54 @@
+{
+	"name": "@solid-cli/commands",
+	"version": "0.0.11",
+	"description": "The main command handlers for the Solid CLI",
+	"license": "MIT",
+	"homepage": "https://solid-cli.netlify.app",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/solidjs-community/solid-cli"
+	},
+	"files": [
+		"dist",
+		"types"
+	],
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./types/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.mjs",
+			"types": "./types/index.d.ts"
+		},
+		"./new": {
+			"import": "./dist/handlers/new.mjs",
+			"require": "./dist/handlers/new.mjs",
+			"types": "./types/handlers/new.d.ts"
+		}
+	},
+	"scripts": {
+		"test": "vitest run",
+		"build": "tsc && tsup"
+	},
+	"devDependencies": {
+		"@chialab/esbuild-plugin-meta-url": "^0.18.0",
+		"@types/node": "^20.11.16",
+		"prettier": "^3.2.5",
+		"tsup": "^8.0.1",
+		"typescript": "^5.3.3"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@begit/core": "^0.0.12",
+		"@clack/prompts": "0.7.0",
+		"@solid-cli/reactivity": "workspace:*",
+		"@solid-cli/ui": "workspace:*",
+		"@solid-cli/utils": "workspace:*",
+		"execa": "^8.0.1",
+		"picocolors": "^1.0.0",
+		"sucrase": "^3.35.0"
+	}
+}

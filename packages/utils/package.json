@@ -1,0 +1,85 @@
+{
+	"name": "@solid-cli/utils",
+	"version": "0.0.10",
+	"description": "A collection of utilities for the Solid CLI",
+	"license": "MIT",
+	"homepage": "https://solid-cli.netlify.app",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/solidjs-community/solid-cli"
+	},
+	"files": [
+		"dist",
+		"types"
+	],
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./types/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.mjs",
+			"types": "./types/index.d.ts"
+		},
+		"./paths": {
+			"import": "./dist/paths/index.mjs",
+			"require": "./dist/paths/index.mjs",
+			"types": "./types/paths/index.d.ts"
+		},
+		"./transform": {
+			"import": "./dist/transform/index.mjs",
+			"require": "./dist/transform/index.mjs",
+			"types": "./types/transform/index.d.ts"
+		},
+		"./updates": {
+			"import": "./dist/updates/index.mjs",
+			"require": "./dist/updates/index.mjs",
+			"types": "./types/updates/index.d.ts"
+		},
+		"./fs": {
+			"import": "./dist/fs/index.mjs",
+			"require": "./dist/fs/index.mjs",
+			"types": "./types/fs/index.d.ts"
+		},
+		"./util-types": {
+			"import": "./dist/util-types/index.mjs",
+			"require": "./dist/util-types/index.mjs",
+			"types": "./types/util-types/index.d.ts"
+		},
+		"./primitives": {
+			"import": "./dist/primitives/index.mjs",
+			"require": "./dist/primitives/index.mjs",
+			"types": "./types/primitives/index.d.ts"
+		},
+		"./package-manager": {
+			"import": "./dist/package-manager/index.mjs",
+			"require": "./dist/package-manager/index.mjs",
+			"types": "./types/package-manager/index.d.ts"
+		}
+	},
+	"scripts": {
+		"test": "vitest run",
+		"build": "tsc && tsup && jiti ./scripts/postBuild.ts"
+	},
+	"devDependencies": {
+		"@chialab/esbuild-plugin-meta-url": "^0.18.0",
+		"@types/node": "20.11.16",
+		"jiti": "^1.21.0",
+		"tsup": "^8.0.1",
+		"typescript": "^5.3.3",
+		"vitest": "^1.2.2"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@clack/core": "0.3.3",
+		"@clack/prompts": "0.7.0",
+		"@solid-cli/reactivity": "workspace:*",
+		"@swc/core": "^1.4.0",
+		"cmd-ts": "^0.13.0",
+		"execa": "^8.0.1",
+		"picocolors": "^1.0.0",
+		"smol-toml": "^1.1.4"
+	}
+}

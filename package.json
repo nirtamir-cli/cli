@@ -1,0 +1,44 @@
+{
+	"name": "solid-cli",
+	"private": true,
+	"version": "0.0.1",
+	"description": "A CLI for making the SolidJS development experience easier, faster, and less error prone.",
+	"license": "MIT",
+	"homepage": "https://solid-cli.netlify.app",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/solidjs-community/solid-cli"
+	},
+	"scripts": {
+		"test": "vitest",
+		"test:all": "turbo run test",
+		"build": "turbo run build",
+		"release": "pnpm build && changeset publish",
+		"watch:all": "nodemon --no-stdin -q --watch packages/core/src -e ts --exec 'turbo run build --scope=core' --watch packages/reactivity/src -e ts --exec 'turbo run build --scope=reactivity' --watch packages/ui/src -e ts --exec 'turbo run build --scope=ui' --watch packages/utils/src -e ts --exec 'turbo run build --scope=utils'",
+		"watch:core": "nodemon --watch packages/core/src -e ts --exec 'turbo run build --scope=core'",
+		"watch:reactivity": "nodemon --watch packages/reactivity/src -e ts --exec 'turbo run build --scope=reactivity'",
+		"watch:ui": "nodemon --watch packages/ui/src -e ts --exec 'turbo run build --scope=ui'",
+		"watch:utils": "nodemon --watch packages/utils/src -e ts --exec 'turbo run build --scope=utils'",
+		"start": "cd packages/core && pnpm start",
+		"format": "prettier --write ."
+	},
+	"contributors": [
+		{
+			"name": "Thomas Beer"
+		},
+		{
+			"name": "Rahul Batra"
+		}
+	],
+	"workspaces": [
+		"./packages/*"
+	],
+	"devDependencies": {
+		"@changesets/cli": "2.27.1",
+		"nodemon": "^3.0.3",
+		"prettier": "^3.2.5",
+		"turbo": "^1.12.2",
+		"vitest": "^1.2.2"
+	},
+	"packageManager": "pnpm@8.7.5"
+}

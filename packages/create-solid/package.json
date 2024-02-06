@@ -1,0 +1,40 @@
+{
+	"name": "@solid-cli/create-solid",
+	"version": "0.0.16",
+	"description": "A stripped down Solid CLI just for creating new projects",
+	"author": "Thomas Beer & Rahul Batra",
+	"license": "MIT",
+	"homepage": "https://solid-cli.netlify.app",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/solidjs-community/solid-cli"
+	},
+	"keywords": [
+		"solidjs",
+		"solid",
+		"cli"
+	],
+	"main": "dist/index.mjs",
+	"bin": {
+		"create-solid": "./dist/index.mjs"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"start": "jiti ./src/index.ts",
+		"build": "tsc && tsup"
+	},
+	"devDependencies": {
+		"@solid-cli/commands": "workspace:*",
+		"jiti": "^1.21.0",
+		"tsup": "^8.0.1",
+		"typescript": "^5.3.3",
+		"@clack/prompts": "0.7.0",
+		"picocolors": "^1.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {}
+}
