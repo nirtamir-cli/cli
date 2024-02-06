@@ -71,6 +71,58 @@ export const integrations = {
 			await flushQueue();
 		},
 	},
+	"prettier": {
+		installs: [
+			"prettier",
+			"prettier-plugin-tailwindess",
+			"@trivago/prettier-plugin-sort-imports",
+			"prettier-plugin-packagejson",
+		],
+		postInstall: async () => {
+			const pM = detectPackageManager();
+			await $`${getRunnerCommand(pM)} tailwindcss init -p`;
+			let tailwindConfig = "tailwind.config.js";
+			if (!fileExists(tailwindConfig)) {
+				p.log.error(color.red(`Can't find tailwind config file`));
+				await cancelable(
+					p.text({
+						message: `Type path to tailwind config: `,
+						validate(value) {
+							if (!value.length) return `Path can not be empty`;
+							const path = validateFilePath(value, "tailwind.config");
+							if (!path) return `Tailwind config at \`${value}\` not found. Please try again`;
+							else {
+								tailwindConfig = path;
+							}
+						},
+					}),
+				);
+			}
+
+			let indexCss = "./src/index.css";
+			if (!fileExists(indexCss)) {
+				p.log.error(color.red(`Can't find index.css`));
+				await cancelable(
+					p.text({
+						message: `Type path to index.css: `,
+						validate(value) {
+							if (!value.length) return `Path can not be empty`;
+							const path = validateFilePath(value, "index.css");
+							if (!path) return `index.css at \`${value}\` not found. Please try again`;
+							else {
+								indexCss = path;
+							}
+						},
+					}),
+				);
+			}
+			p.log.info("Updating tailwind config");
+			await insertAfter(tailwindConfig, "content: [", '"./index.html", "./src/**/*.{js,ts,jsx,tsx}"');
+			await insertAtBeginning(indexCss, "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n");
+			// Instantly flush queue
+			await flushQueue();
+		},
+	},
 	"unocss": {
 		pluginOptions: {
 			importName: "UnoCss",

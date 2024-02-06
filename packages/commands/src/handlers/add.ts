@@ -101,7 +101,7 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		})
 		.filter((p) => p) as Configs;
 
-	const viteConfig = await getViteConfig();
+	// const viteConfig = await getViteConfig();
 
 	for (let i = 0; i < configs.length; i++) {
 		const config = configs[i];
@@ -114,19 +114,19 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 
 	if (!configs.length) return;
 
-	await spinnerify({
-		startText: "Processing config",
-		finishText: "Config processed",
-		fn: async () => {
-			const code = await transformPlugins(
-				configs.map((c) => c.pluginOptions).filter(Boolean) as PluginOptions[],
-				{ name: viteConfig, contents: (await readFile(viteConfig)).toString() },
-				forceTransform,
-				undefined,
-			);
-			writeFile(viteConfig, code);
-		},
-	});
+	// await spinnerify({
+	// 	startText: "Processing config",
+	// 	finishText: "Config processed",
+	// 	fn: async () => {
+	// 		const code = await transformPlugins(
+	// 			configs.map((c) => c.pluginOptions).filter(Boolean) as PluginOptions[],
+	// 			{ name: viteConfig, contents: (await readFile(viteConfig)).toString() },
+	// 			forceTransform,
+	// 			undefined,
+	// 		);
+	// 		writeFile(viteConfig, code);
+	// 	},
+	// });
 
 	p.log.info("Preparing post install steps for integrations");
 	let projectRoot = await getRootFile();
