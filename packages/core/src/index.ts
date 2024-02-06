@@ -19,9 +19,9 @@ import {
 } from "@nirtamir-cli/commands";
 const possibleActions = () =>
 	[
-		{ value: "add", label: t.ACTION_ADD, hint: "solid add ..." },
-		{ value: "new", label: t.ACTION_NEW, hint: "solid new ..." },
-		{ value: "start", label: t.ACTION_START, hint: "solid start ..." },
+		{ value: "add", label: t.ACTION_ADD, hint: "nirtamir-cli add ..." },
+		{ value: "new", label: t.ACTION_NEW, hint: "nirtamir-cli new ..." },
+		{ value: "start", label: t.ACTION_START, hint: "nirtamir-cli start ..." },
 	] as const;
 
 export const provideStartSuggestions = async () => {
@@ -89,7 +89,7 @@ const main = async () => {
 	const needsUpdate = createAsync(async () => await updater({ name, version, ttl: 86_400_000 }));
 	setLocale(getField("lang"));
 	const cli = subcommands({
-		name: "solid",
+		name: "nirtamir-cli",
 		cmds: await loadCommands(),
 		version,
 	});

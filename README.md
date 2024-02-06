@@ -2,6 +2,8 @@
   <img width="100%" src="https://assets.solidjs.com/banner?type=CLI&background=tiles&project=%20" alt="Solid CLI">
 </p>
 
+This project shamefully borrows heavily from the [solid-cli](https://github.com/solidjs-community/solid-cli) project.
+
 > [!WARNING]
 > This project is under heavy development and is not yet complete. More features coming soon!
 
