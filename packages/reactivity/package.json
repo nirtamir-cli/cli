@@ -3,7 +3,7 @@
 	"version": "0.0.11",
 	"description": "The minimal, eager reactive system that powers the Solid CLI",
 	"license": "MIT",
-	"homepage": "https://nirtamir-cli.netlify.app",
+	"homepage": "https://cli.nirtamir.com",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/nirtamir2/nirtamir-cli"

@@ -4,7 +4,7 @@
 	"description": "A stripped down Nir Tamir's CLI just for creating new projects",
 	"author": "Nir Tamir",
 	"license": "MIT",
-	"homepage": "https://nirtamir-cli.netlify.app",
+	"homepage": "https://cli.nirtamir.com",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/nirtamir2/nirtamir-cli"

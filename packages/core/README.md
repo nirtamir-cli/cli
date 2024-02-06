@@ -37,7 +37,7 @@ For more help, try running `solid <subcommand> --help`
 
 ## Documentation
 
-Visit our [official documentation](https://nirtamir-cli.netlify.app/)
+Visit our [official documentation](https://cli.nirtamir.com/)
 
 ## Support
 

@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"description": "A CLI for making the Nir Tamir's development experience easier, faster, and less error prone.",
 	"license": "MIT",
-	"homepage": "https://nirtamir-cli.netlify.app",
+	"homepage": "https://cli.nirtamir.com",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/nirtamir2/nirtamir-cli"

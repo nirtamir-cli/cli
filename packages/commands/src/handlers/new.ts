@@ -60,7 +60,7 @@ type AllSupported = (typeof localSupported)[number] | (typeof stackblitzSupporte
 const modifyReadme = async (name: string) => {
 	await insertAtEnd(
 		`${name}/README.md`,
-		"\n## This project was created with the [Solid CLI](https://nirtamir-cli.netlify.app)\n",
+		"\n## This project was created with the [Solid CLI](https://cli.nirtamir.com)\n",
 	);
 	await flushQueue();
 };

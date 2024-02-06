@@ -4,7 +4,7 @@
 	"description": "A CLI for Solid",
 	"author": "Thomas Beer & Rahul Batra",
 	"license": "MIT",
-	"homepage": "https://nirtamir-cli.netlify.app",
+	"homepage": "https://cli.nirtamir.com",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/nirtamir2/nirtamir-cli"
