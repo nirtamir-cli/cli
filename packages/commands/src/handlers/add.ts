@@ -16,6 +16,7 @@ import {
 	flushPackageUpdates,
 	queueUpdate,
 	summarizeUpdates,
+	flushDevPackageUpdates,
 } from "@nirtamir-cli/utils/updates";
 const handleAutocompleteAdd = async () => {
 	const supportedIntegrations = (Object.keys(integrations) as Supported[]).map((value) => ({ label: value, value }));
@@ -105,7 +106,8 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 
 	for (let i = 0; i < configs.length; i++) {
 		const config = configs[i];
-		config.installs.forEach((p) => queueUpdate({ type: "package", name: p }));
+		config.installs?.forEach((p) => queueUpdate({ type: "package", name: p }));
+		config.devInstalls?.forEach((p) => queueUpdate({ type: "dev-package", name: p }));
 	}
 	// Queue primitives
 	for (const primitive of await transformPrimitives(possiblePrimitives)) {
@@ -156,17 +158,24 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		},
 	});
 	if (UPDATESQUEUE.length === 0) return;
-	const { fileUpdates, packageUpdates, commandUpdates } = summarizeUpdates();
+	const { fileUpdates, packageUpdates, commandUpdates, devPackageUpdates } = summarizeUpdates();
 	// Inspired by Qwik's CLI
 	if (fileUpdates.length) p.log.message([`${color.cyan("Modify")}`, ...fileUpdates.map((f) => `  - ${f}`)].join("\n"));
 	if (packageUpdates.length)
 		p.log.message([`${color.cyan("Install")}`, ...packageUpdates.map((p) => `  - ${p}`)].join("\n"));
+	if (packageUpdates.length)
+		p.log.message([`${color.cyan("Install Dev")}`, ...devPackageUpdates.map((p) => `  - ${p}`)].join("\n"));
 	if (commandUpdates.length)
 		p.log.message([`${color.cyan("Run commands")}`, ...commandUpdates.map((p) => `  - ${p}`)].join("\n"));
 	const confirmed = await p.confirm({ message: "Do you wish to continue?" });
 	if (!confirmed || p.isCancel(confirmed)) return;
 	await spinnerify({ startText: "Writing files...", finishText: "Updates written", fn: flushFileUpdates });
 	await spinnerify({ startText: "Installing packages...", finishText: "Packages installed", fn: flushPackageUpdates });
+	await spinnerify({
+		startText: "Installing dev packages...",
+		finishText: "Dev Packages installed",
+		fn: flushDevPackageUpdates,
+	});
 	await spinnerify({ startText: "Running setup commands", finishText: "Setup commands ran", fn: flushCommandUpdates });
 	clearQueue();
 	const postInstalls = configs.filter((c) => c.postInstall);

@@ -14,7 +14,8 @@ export type Supported = keyof typeof integrations;
 
 export type IntegrationsValue = {
 	pluginOptions?: PluginOptions;
-	installs: string[];
+	installs?: string[];
+	devInstalls?: string[];
 	additionalConfig?: () => Promise<void>;
 	postInstall?: () => Promise<void>;
 };
@@ -72,7 +73,7 @@ export const integrations = {
 	// 	},
 	// },
 	prettier: {
-		installs: [
+		devInstalls: [
 			"prettier",
 			"prettier-plugin-tailwindcss",
 			"@trivago/prettier-plugin-sort-imports",

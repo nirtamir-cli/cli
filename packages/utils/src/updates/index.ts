@@ -8,12 +8,14 @@ declare global {
 export const UPDATESQUEUE: Update[] = globalThis.UPDATESQUEUE ?? [];
 globalThis.UPDATESQUEUE = UPDATESQUEUE;
 type PackageUpdate = { type: "package"; name: string };
+type DevPackageUpdate = { type: "dev-package"; name: string };
 type CommandUpdate = { type: "command"; name: string };
 type FileUpdate = { type: "file"; name: string; contents: string; checked: boolean };
 // Don't bother explicitly handling plugin updates, since they're just a file update
-export type Update = PackageUpdate | CommandUpdate | FileUpdate;
+export type Update = PackageUpdate | CommandUpdate | FileUpdate | DevPackageUpdate;
 type UpdateSummary = {
 	packageUpdates: string[];
+	devPackageUpdates: string[];
 	commandUpdates: string[];
 	fileUpdates: string[];
 };
@@ -24,8 +26,9 @@ export const clearQueue = () => {
 export const summarizeUpdates = (): UpdateSummary => {
 	const fileUpdates = UPDATESQUEUE.filter((u) => u.type === "file").map((s) => s.name);
 	const packageUpdates = UPDATESQUEUE.filter((u) => u.type === "package").map((s) => s.name);
+	const devPackageUpdates = UPDATESQUEUE.filter((u) => u.type === "dev-package").map((s) => s.name);
 	const commandUpdates = UPDATESQUEUE.filter((u) => u.type === "command").map((s) => s.name);
-	return { packageUpdates, commandUpdates, fileUpdates };
+	return { devPackageUpdates, packageUpdates, commandUpdates, fileUpdates };
 };
 export const queueUpdate = (update: Update) => {
 	UPDATESQUEUE.push(update);
@@ -67,6 +70,17 @@ export const flushPackageUpdates = async () => {
 		await $`${pM} ${instlCmd} ${update.name}`;
 	}
 };
+
+export const flushDevPackageUpdates = async () => {
+	const packageUpdates = UPDATESQUEUE.filter((u) => u.type === "dev-package") as PackageUpdate[];
+	const pM = detectPackageManager();
+	const instlCmd = getInstallCommand(pM);
+	const devFlag = "-D";
+	for (const update of packageUpdates) {
+		await $ `${pM} ${instlCmd} ${devFlag} ${update.name}`;
+	}
+};
+
 export const flushCommandUpdates = async () => {
 	const commandUpdates = UPDATESQUEUE.filter((u) => u.type === "command") as CommandUpdate[];
 	for (const update of commandUpdates) {
