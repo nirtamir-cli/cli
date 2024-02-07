@@ -215,7 +215,18 @@ npx jira-prepare-commit-msg $1
 			);
 		},
 	},
-	// "TODO: alias, svg, t3-env, icons": {},
+	"next-static-paths": {
+		installs: ["@nirtamir2/next-static-paths"],
+		scripts: {
+			"generate-pages-types": "next-static-paths --pages-dir ./src --output . && :",
+		},
+		packageJson: {
+			"lint-staged": {
+				"src/app/**/page.tsx": "pnpm run generate-pages-types",
+			},
+		},
+	},
+	// "TODO: alias, svg, t3-env, app icons, i18n": {},
 	"clean-script": {
 		scripts: {
 			clean: "rm -rf ./dist",

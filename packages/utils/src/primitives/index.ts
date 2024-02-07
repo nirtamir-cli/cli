@@ -23,7 +23,6 @@ const fetchPrimitives = async () => {
 		{ label: "zod", value: "zod", group: "primitives" },
 		{ label: "clsx", value: "clsx", group: "primitives" },
 		{ label: "nanoid", value: "nanoid", group: "primitives" },
-		{ label: "@nirtamir2/next-static-paths", value: "@nirtamir2/next-static-paths", group: "primitives" },
 		{ label: "dayjs", value: "dayjs", group: "primitives" },
 		{ label: "framer-motion", value: "framer-motion", group: "primitives" },
 		{ label: "immer", value: "immer", group: "primitives" },
