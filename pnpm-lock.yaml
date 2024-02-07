@@ -84,9 +84,6 @@ importers:
       '@nirtamir-cli/reactivity':
         specifier: workspace:*
         version: link:../reactivity
-      '@nirtamir-cli/swc-plugin-nirtamir-cli':
-        specifier: workspace:*
-        version: link:../swc-plugin-solid-cli
       '@nirtamir-cli/ui':
         specifier: workspace:*
         version: link:../ui
@@ -157,8 +154,6 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
-
-  packages/swc-plugin-solid-cli: {}
 
   packages/ui:
     dependencies:
