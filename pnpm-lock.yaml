@@ -60,6 +60,9 @@ importers:
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
+      tsconfig-type:
+        specifier: ^1.27.0
+        version: 1.27.0
       tsup:
         specifier: ^8.0.1
         version: 8.0.1(@swc/core@1.4.0)(typescript@5.3.3)
@@ -202,6 +205,12 @@ importers:
       cmd-ts:
         specifier: ^0.13.0
         version: 0.13.0
+      deepmerge:
+        specifier: ^4.3.1
+        version: 4.3.1
+      dset:
+        specifier: ^3.1.3
+        version: 3.1.3
       execa:
         specifier: ^8.0.1
         version: 8.0.1
@@ -221,6 +230,9 @@ importers:
       jiti:
         specifier: ^1.21.0
         version: 1.21.0
+      tsconfig-type:
+        specifier: ^1.27.0
+        version: 1.27.0
       tsup:
         specifier: ^8.0.1
         version: 8.0.1(@swc/core@1.4.0)(typescript@5.3.3)
@@ -1460,6 +1472,11 @@ packages:
       type-detect: 4.0.8
     dev: true
 
+  /deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /defaults@1.0.4:
     resolution: {integrity: sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A==}
     dependencies:
@@ -1500,6 +1517,11 @@ packages:
     dependencies:
       path-type: 4.0.0
     dev: true
+
+  /dset@3.1.3:
+    resolution: {integrity: sha512-20TuZZHCEZ2O71q9/+8BwKwZ0QtD9D8ObhrihJPr+vLLYlSuAU3/zL4cSlgbfeoGHTjCSJBa7NGcrF9/Bx/WJQ==}
+    engines: {node: '>=4'}
+    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -3220,6 +3242,10 @@ packages:
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
+
+  /tsconfig-type@1.27.0:
+    resolution: {integrity: sha512-AqaCPWKadRpUurdA+e23LJ5R3ZSMWb0ph3HOZzUMIzaBLID9zprcXISWJvBUVNRKSxIoa7fVVWkinv2sFg7/+Q==}
+    dev: true
 
   /tsup@8.0.1(@swc/core@1.4.0)(typescript@5.3.3):
     resolution: {integrity: sha512-hvW7gUSG96j53ZTSlT4j/KL0q1Q2l6TqGBFc6/mu/L46IoNWqLLUzLRLP1R8Q7xrJTmkDxxDoojV5uCVs1sVOg==}

@@ -17,7 +17,7 @@ import {
 	queueUpdate,
 	summarizeUpdates,
 	flushDevPackageUpdates,
-	flushScriptAdditions,
+	flushScriptAdditions, flushTSConfigAdditions,
 } from "@nirtamir-cli/utils/updates";
 const handleAutocompleteAdd = async () => {
 	const supportedIntegrations = (Object.keys(integrations) as Supported[]).map((value) => ({ label: value, value }));
@@ -110,6 +110,9 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		config.installs?.forEach((p) => queueUpdate({ type: "package", name: p }));
 		config.devInstalls?.forEach((p) => queueUpdate({ type: "dev-package", name: p }));
 		Object.entries(config.scripts ?? {}).forEach(([name, content]) => queueUpdate({ type: "script", name, content }));
+		if (config.tsconfig) {
+			queueUpdate({ type: "tsconfig", name: Object.keys(config.tsconfig).toString(), tsconfig: config.tsconfig });
+		}
 	}
 	// Queue primitives
 	for (const primitive of await transformPrimitives(possiblePrimitives)) {
@@ -160,7 +163,8 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		},
 	});
 	if (UPDATESQUEUE.length === 0) return;
-	const { fileUpdates, packageUpdates, commandUpdates, devPackageUpdates, scriptsUpdates } = summarizeUpdates();
+	const { fileUpdates, packageUpdates, commandUpdates, devPackageUpdates, scriptsUpdates, tsconfigUpdates } =
+		summarizeUpdates();
 	// Inspired by Qwik's CLI
 	if (fileUpdates.length) p.log.message([`${color.cyan("Modify")}`, ...fileUpdates.map((f) => `  - ${f}`)].join("\n"));
 	if (scriptsUpdates.length)
@@ -171,6 +175,9 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		p.log.message([`${color.cyan("Install Dev")}`, ...devPackageUpdates.map((p) => `  - ${p}`)].join("\n"));
 	if (commandUpdates.length)
 		p.log.message([`${color.cyan("Run commands")}`, ...commandUpdates.map((p) => `  - ${p}`)].join("\n"));
+	if (tsconfigUpdates.length)
+		p.log.message([`${color.cyan("Update tsconfig.json")}`, ...tsconfigUpdates.map((p) => `  - ${p}`)].join("\n"));
+
 	const confirmed = await p.confirm({ message: "Do you wish to continue?" });
 	if (!confirmed || p.isCancel(confirmed)) return;
 	await spinnerify({ startText: "Writing files...", finishText: "Updates written", fn: flushFileUpdates });
@@ -181,6 +188,7 @@ export const handleAdd = async (packages?: string[], forceTransform: boolean = f
 		fn: flushDevPackageUpdates,
 	});
 	await spinnerify({ startText: "Running setup commands", finishText: "Setup commands ran", fn: flushCommandUpdates });
+	await spinnerify({ startText: "Updating tsconfig", finishText: "tsconfig.json updated", fn: flushTSConfigAdditions });
 	await spinnerify({ startText: "Adding scripts", finishText: "Scripts Added", fn: flushScriptAdditions });
 	clearQueue();
 	const postInstalls = configs.filter((c) => c.postInstall);

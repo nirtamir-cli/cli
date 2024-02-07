@@ -18,7 +18,18 @@ const fetchPrimitives = async () => {
 	// 	return opt;
 	// });
 
-	const primitives: Option[] = [];
+	const primitives: Option[] = [
+		{ label: "ts-extras", value: "ts-extras", group: "primitives" },
+		{ label: "zod", value: "zod", group: "primitives" },
+		{ label: "clsx", value: "clsx", group: "primitives" },
+		{ label: "nanoid", value: "nanoid", group: "primitives" },
+		{ label: "@nirtamir2/next-static-paths", value: "@nirtamir2/next-static-paths", group: "primitives" },
+		{ label: "dayjs", value: "dayjs", group: "primitives" },
+		{ label: "framer-motion", value: "framer-motion", group: "primitives" },
+		{ label: "immer", value: "immer", group: "primitives" },
+		{ label: "react-hook-form", value: "react-hook-form", group: "primitives" },
+		{ label: "react-use", value: "react-use", group: "primitives" },
+	];
 
 	return primitives;
 };

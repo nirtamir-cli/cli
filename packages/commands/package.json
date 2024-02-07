@@ -35,6 +35,7 @@
 		"@chialab/esbuild-plugin-meta-url": "^0.18.0",
 		"@types/node": "^20.11.16",
 		"prettier": "^3.2.5",
+		"tsconfig-type": "^1.27.0",
 		"tsup": "^8.0.1",
 		"typescript": "^5.3.3"
 	},

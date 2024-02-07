@@ -2,6 +2,9 @@ import { open, writeFile } from "fs/promises";
 import { $ } from "execa";
 import { detectPackageManager, getInstallCommand } from "../package-manager";
 import { readFile } from "../fs";
+import { Tsconfig } from "tsconfig-type";
+import deepmerge from "deepmerge";
+
 declare global {
 	var UPDATESQUEUE: Update[] | undefined;
 }
@@ -13,14 +16,16 @@ type DevPackageUpdate = { type: "dev-package"; name: string };
 type CommandUpdate = { type: "command"; name: string };
 type ScriptUpdate = { type: "script"; name: string; content: string };
 type FileUpdate = { type: "file"; name: string; contents: string; checked: boolean };
+type TSConfigUpdate = { type: "tsconfig"; name: string; tsconfig: Partial<Tsconfig> };
 // Don't bother explicitly handling plugin updates, since they're just a file update
-export type Update = PackageUpdate | CommandUpdate | FileUpdate | DevPackageUpdate | ScriptUpdate;
+export type Update = PackageUpdate | CommandUpdate | FileUpdate | DevPackageUpdate | ScriptUpdate | TSConfigUpdate;
 type UpdateSummary = {
 	packageUpdates: string[];
 	devPackageUpdates: string[];
 	commandUpdates: string[];
 	fileUpdates: string[];
 	scriptsUpdates: string[];
+	tsconfigUpdates: string[];
 };
 
 export const clearQueue = () => {
@@ -32,7 +37,8 @@ export const summarizeUpdates = (): UpdateSummary => {
 	const devPackageUpdates = UPDATESQUEUE.filter((u) => u.type === "dev-package").map((s) => s.name);
 	const commandUpdates = UPDATESQUEUE.filter((u) => u.type === "command").map((s) => s.name);
 	const scriptsUpdates = UPDATESQUEUE.filter((u) => u.type === "script").map((s) => s.name);
-	return { devPackageUpdates, packageUpdates, commandUpdates, fileUpdates, scriptsUpdates };
+	const tsconfigUpdates = UPDATESQUEUE.filter((u) => u.type === "tsconfig").map((s) => s.name);
+	return { devPackageUpdates, packageUpdates, commandUpdates, fileUpdates, scriptsUpdates, tsconfigUpdates };
 };
 export const queueUpdate = (update: Update) => {
 	UPDATESQUEUE.push(update);
@@ -111,6 +117,63 @@ export const flushScriptAdditions = async () => {
 	await writeFile(packageJsonFileName, JSON.stringify(packageJson, null, 2));
 };
 
+// https://github.com/TehShrike/deepmerge
+const combineMerge = (target: Array<any>, source: Array<object>, options: deepmerge.ArrayMergeOptions) => {
+	const destination = target.slice()
+
+	source.forEach((item, index) => {
+		if (typeof destination[index] === 'undefined') {
+			destination[index] = options.cloneUnlessOtherwiseSpecified(item, options)
+		} else if (options.isMergeableObject(item)) {
+			destination[index] = deepmerge(target[index], item, options)
+		} else if (target.indexOf(item) === -1) {
+			destination.push(item)
+		}
+	})
+	return destination
+}
+export const flushTSConfigAdditions = async () => {
+	const tsConfigUpdates = UPDATESQUEUE.filter((u) => u.type === "tsconfig") as TSConfigUpdate[];
+
+	const tsConfigFileName = "tsconfig.json";
+	const tsConfigJsonStr = (await readFile(tsConfigFileName)).toString();
+	const tsconfig = JSON.parse(tsConfigJsonStr) as Tsconfig;
+
+	const result = deepmerge.all([tsconfig, ...tsConfigUpdates.map((update) => update.tsconfig)], {
+		arrayMerge: combineMerge,
+	});
+
+	await writeFile(tsConfigFileName, JSON.stringify(result, null, 2));
+};
+
+function isString(value: unknown): value is string {
+	return typeof value === "string";
+}
+
+function uniq<T>(arr: T[]) {
+	return [...new Set(arr)];
+}
+
+function getUpdatedExtendedValue({ newValue, prevValue }: { prevValue: unknown; newValue: string }) {
+	if (isString(prevValue)) {
+		return uniq([prevValue, newValue]);
+	}
+	if (Array.isArray(prevValue)) {
+		return uniq([...prevValue, newValue]);
+	}
+	return newValue;
+}
+
+export const updateTSConfigExtends = async (value: string) => {
+	const tsconfigName = "tsconfing.json";
+	const tsconfigJsonStr = (await readFile(tsconfigName)).toString();
+	const tsconfigJson = JSON.parse(tsconfigJsonStr);
+
+	tsconfigJson["extends"] = getUpdatedExtendedValue({ prevValue: tsconfigJson?.extends as unknown, newValue: value });
+
+	await writeFile(tsconfigName, JSON.stringify(tsconfigJson, null, 2));
+};
+
 /**
  * Flushes every operation in the queue
  */
@@ -119,5 +182,6 @@ export const flushQueue = async () => {
 	await flushScriptAdditions();
 	await flushPackageUpdates();
 	await flushCommandUpdates();
+	await flushTSConfigAdditions();
 	clearQueue();
 };

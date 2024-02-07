@@ -9,6 +9,7 @@ import { cancelable } from "@nirtamir-cli/ui";
 import { PluginOptions } from "@chialab/esbuild-plugin-meta-url";
 import { flushQueue } from "@nirtamir-cli/utils/updates";
 import { readFile } from "fs/promises";
+import { Tsconfig } from "tsconfig-type";
 
 // All the integrations/packages that we support
 export type Supported = keyof typeof integrations;
@@ -20,6 +21,7 @@ export type IntegrationsValue = {
 	devInstalls?: string[];
 	additionalConfig?: () => Promise<void>;
 	postInstall?: () => Promise<void>;
+	tsconfig?: Partial<Tsconfig>;
 };
 
 export type Integrations = Record<Supported, IntegrationsValue>;
@@ -74,7 +76,7 @@ export const integrations = {
 	// 		await flushQueue();
 	// 	},
 	// },
-	prettier: {
+	"prettier": {
 		devInstalls: [
 			"prettier",
 			"prettier-plugin-tailwindcss",
@@ -121,7 +123,7 @@ export const integrations = {
 			);
 		},
 	},
-	eslint: {
+	"eslint": {
 		devInstalls: ["eslint", "eslint-config-nirtamir2"],
 		scripts: {
 			lint: 'eslint --fix "./src/**/*.{ts,tsx,js,jsx}"',
@@ -165,62 +167,37 @@ export const integrations = {
 			);
 		},
 	},
-	ci: {
+	"ci": {
 		scripts: {
-			"ci": "pnpm run --parallel --aggregate-output \"/^(lint|format|type-check).*/\"",
-		}
+			ci: 'pnpm run --parallel --aggregate-output "/^(lint|format|type-check).*/"',
+		},
 	},
-	typescript: {
-		devInstalls: [
-			"typescript",
-			"@tsconfig/strictest",
-		],
+	"typescript": {
+		devInstalls: ["typescript", "@tsconfig/strictest"],
 		scripts: {
-			"type-check": "tsc --pretty --noEmit"
+			"type-check": "tsc --pretty --noEmit",
+		},
+		tsconfig: {
+			extends: "@tsconfig/strictest/tsconfig.json",
+		},
+	},
+	"ts-reset": {
+		devInstalls: ["@total-typescript/ts-reset"],
+		tsconfig: {
+			includes: ["reset.d.ts"],
 		},
 		additionalConfig: async () => {
-			writeFile(
-				"tsconfig.json",
-				`{
-  "extends": "@tsconfig/strictest/tsconfig.json",
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "downlevelIteration": true,
-    "plugins": [
-      {
-        "name": "next",
-      },
-    ],
-    "paths": {
-      "@icon/icon-name": ["./src/ui/icons/name.d.ts"],
-      "@/*": ["./src/*"],
-    },
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "reset.d.ts",
-    "./src/ui/icons/name.d.ts",
-    ".next/types/**/*.ts",
-  ],
-  "exclude": ["node_modules"],
-}
-`,
-			);
+			writeFile("reset.d.ts", `import "@total-typescript/ts-reset";`);
 		},
 	},
+	"lodash": {
+		installs: ["lodash"],
+		devInstalls: ["@types/lodash"],
+	},
+	"type-fest": {
+		devInstalls: ["type-fest"],
+	},
+
 	// "unocss": {
 	// 	pluginOptions: {
 	// 		importName: "UnoCss",
