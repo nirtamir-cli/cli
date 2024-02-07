@@ -226,6 +226,12 @@ npx jira-prepare-commit-msg $1
 			},
 		},
 	},
+	"knip": {
+		devInstalls: ["knip"],
+		scripts: {
+			knip: "knip",
+		},
+	},
 	// "TODO: alias, svg, t3-env, app icons, i18n": {},
 	"clean-script": {
 		scripts: {

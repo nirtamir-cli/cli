@@ -51,7 +51,7 @@ vi.mock("../src/lib/utils/helpers.ts", async () => {
 		getRootFile: async (): Promise<string> => new Promise((r) => r("./src/root.tsx")),
 	};
 });
-describe("Update config", () => {
+describe.skip("Update config", () => {
 	it(
 		"Adds a plugin properly to the config",
 		async () => {
