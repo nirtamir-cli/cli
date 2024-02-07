@@ -60,12 +60,12 @@ importers:
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
-      tsconfig-type:
-        specifier: ^1.27.0
-        version: 1.27.0
       tsup:
         specifier: ^8.0.1
         version: 8.0.1(@swc/core@1.4.0)(typescript@5.3.3)
+      type-fest:
+        specifier: ^4.10.2
+        version: 4.10.2
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -230,12 +230,12 @@ importers:
       jiti:
         specifier: ^1.21.0
         version: 1.21.0
-      tsconfig-type:
-        specifier: ^1.27.0
-        version: 1.27.0
       tsup:
         specifier: ^8.0.1
         version: 8.0.1(@swc/core@1.4.0)(typescript@5.3.3)
+      type-fest:
+        specifier: ^4.10.2
+        version: 4.10.2
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -3243,10 +3243,6 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /tsconfig-type@1.27.0:
-    resolution: {integrity: sha512-AqaCPWKadRpUurdA+e23LJ5R3ZSMWb0ph3HOZzUMIzaBLID9zprcXISWJvBUVNRKSxIoa7fVVWkinv2sFg7/+Q==}
-    dev: true
-
   /tsup@8.0.1(@swc/core@1.4.0)(typescript@5.3.3):
     resolution: {integrity: sha512-hvW7gUSG96j53ZTSlT4j/KL0q1Q2l6TqGBFc6/mu/L46IoNWqLLUzLRLP1R8Q7xrJTmkDxxDoojV5uCVs1sVOg==}
     engines: {node: '>=18'}
@@ -3379,6 +3375,11 @@ packages:
   /type-fest@0.8.1:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
+    dev: true
+
+  /type-fest@4.10.2:
+    resolution: {integrity: sha512-anpAG63wSpdEbLwOqH8L84urkL6PiVIov3EMmgIhhThevh9aiMQov+6Btx0wldNcvm4wV+e2/Rt1QdDwKHFbHw==}
+    engines: {node: '>=16'}
     dev: true
 
   /typed-array-buffer@1.0.0:

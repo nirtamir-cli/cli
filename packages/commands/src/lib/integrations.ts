@@ -1,4 +1,4 @@
-import { insertAfter, insertAtBeginning, writeFile } from "@nirtamir-cli/utils/fs";
+import { insertAfter, insertAtBeginning, insertAtEnd, writeFile } from "@nirtamir-cli/utils/fs";
 import { fileExists, validateFilePath } from "./utils/helpers";
 import { $ } from "execa";
 import { getRunnerCommand, detectPackageManager } from "@nirtamir-cli/utils/package-manager";
@@ -9,7 +9,7 @@ import { cancelable } from "@nirtamir-cli/ui";
 import { PluginOptions } from "@chialab/esbuild-plugin-meta-url";
 import { flushQueue } from "@nirtamir-cli/utils/updates";
 import { readFile } from "fs/promises";
-import { Tsconfig } from "tsconfig-type";
+import type { PackageJson, TsConfigJson } from "type-fest";
 
 // All the integrations/packages that we support
 export type Supported = keyof typeof integrations;
@@ -21,7 +21,8 @@ export type IntegrationsValue = {
 	devInstalls?: string[];
 	additionalConfig?: () => Promise<void>;
 	postInstall?: () => Promise<void>;
-	tsconfig?: Partial<Tsconfig>;
+	tsconfig?: Partial<TsConfigJson>;
+	packageJson?: Partial<PackageJson>;
 };
 
 export type Integrations = Record<Supported, IntegrationsValue>;
@@ -196,6 +197,67 @@ export const integrations = {
 	},
 	"type-fest": {
 		devInstalls: ["type-fest"],
+	},
+	"jira-precommit-message": {
+		devInstalls: ["jira-prepare-commit-msg"],
+		packageJson: {
+			"jira-prepare-commit-msg": {
+				messagePattern: "$J - $M",
+				jiraTicketPattern: "([A-Z]+-\\d+|\\d+)",
+			},
+		},
+		postInstall: async () => {
+			writeFile(
+				".husky/prepare-commit-msg",
+				`#!/bin/sh
+npx jira-prepare-commit-msg $1
+`,
+			);
+		},
+	},
+	// "TODO: alias, svg, t3-env, icons": {},
+	"clean-script": {
+		scripts: {
+			clean: "rm -rf ./dist",
+		},
+	},
+	"sync-packages": {
+		devInstalls: ["syncpack"],
+		packageJson: {
+			"lint-staged": {
+				"**/package.json": "pnpm run sync-packages && :",
+			},
+		},
+		scripts: {
+			"sync-packages": "syncpack fix-mismatches",
+		},
+	},
+	"precommit": {
+		devInstalls: ["husky", "lint-staged"],
+		// scripts: {
+		// 	prepare: "husky",
+		// },
+		postInstall: async () => {
+			const pM = detectPackageManager();
+			await $`${getRunnerCommand(pM)} husky init`;
+
+			if (!fileExists(".husky/pre-commit")) {
+				p.log.error(color.red(`Can't find precommit file`));
+			}
+			await insertAtEnd(
+				".husky/pre-commit",
+				`#!/bin/sh
+pnpm lint-staged`,
+			);
+			// Instantly flush queue
+			await flushQueue();
+		},
+		packageJson: {
+			"lint-staged": {
+				"*.{ts,tsx,md}": "eslint --cache --fix",
+				"*.{ts,tsx,css,html,svg,md,json,js}": "prettier --write",
+			},
+		},
 	},
 
 	// "unocss": {
