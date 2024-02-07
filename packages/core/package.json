@@ -1,5 +1,5 @@
 {
-	"name": "@nirtamir2/cli",
+	"name": "@nirtamir-cli/core",
 	"version": "0.0.19",
 	"description": "A CLI for Solid",
 	"author": "Thomas Beer & Rahul Batra",

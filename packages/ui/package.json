@@ -31,9 +31,8 @@
 		"typescript": "^5.3.3",
 		"@types/node": "20.11.16"
 	},
-	"private": true,
 	"publishConfig": {
-		"access": "restricted"
+		"access": "public"
 	},
 	"dependencies": {
 		"@clack/core": "0.3.3",
