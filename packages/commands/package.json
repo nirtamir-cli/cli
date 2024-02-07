@@ -39,8 +39,9 @@
 		"type-fest": "^4.10.2",
 		"typescript": "^5.3.3"
 	},
+	"private": true,
 	"publishConfig": {
-		"access": "public"
+		"access": "restricted"
 	},
 	"dependencies": {
 		"@begit/core": "^0.0.12",

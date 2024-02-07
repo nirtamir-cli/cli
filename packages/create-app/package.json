@@ -33,8 +33,9 @@
 		"@clack/prompts": "0.7.0",
 		"picocolors": "^1.0.0"
 	},
+	"private": true,
 	"publishConfig": {
-		"access": "public"
+		"access": "restricted"
 	},
 	"dependencies": {}
 }

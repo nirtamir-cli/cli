@@ -19,7 +19,8 @@
 		"test": "cargo +nightly test"
 	},
 	"preferUnplugged": true,
+	"private": true,
 	"publishConfig": {
-		"access": "public"
+		"access": "restricted"
 	}
 }

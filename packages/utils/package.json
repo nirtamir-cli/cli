@@ -70,8 +70,9 @@
 		"typescript": "^5.3.3",
 		"vitest": "^1.2.2"
 	},
+	"private": true,
 	"publishConfig": {
-		"access": "public"
+		"access": "restricted"
 	},
 	"dependencies": {
 		"@clack/core": "0.3.3",
