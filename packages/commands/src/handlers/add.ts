@@ -7,7 +7,6 @@ import { primitives, loadPrimitives } from "@nirtamir-cli/utils/primitives";
 import { t } from "@nirtamir-cli/utils";
 import { fileExists, getRootFile, getViteConfig, validateFilePath } from "../lib/utils/helpers";
 import { writeFile, readFile } from "@nirtamir-cli/utils/fs";
-import { transformPlugins, type PluginOptions } from "@nirtamir-cli/utils/transform";
 import {
 	UPDATESQUEUE,
 	clearQueue,

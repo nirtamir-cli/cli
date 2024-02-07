@@ -1,5 +1,4 @@
 import { readFile, writeFile } from "@nirtamir-cli/utils/fs";
-import { transformPlugins } from "@nirtamir-cli/utils/transform";
 import * as p from "@clack/prompts";
 import { cancelable } from "@nirtamir-cli/ui";
 
@@ -29,22 +28,5 @@ const handleAutocompleteAdapter = async () => {
 export const handleAdapter = async (name?: string, forceTransform = false) => {
 	if (!name) {
 		await handleAutocompleteAdapter();
-		return;
 	}
-	const sym = Symbol(name).toString();
-	let code = await transformPlugins(
-		[
-			{
-				importName: "solid",
-				importSource: "solid-start/vite",
-				isDefault: true,
-				options: { adapter: sym },
-			},
-		],
-		{ name: "vite.config.ts", contents: (await readFile("vite.config.ts")).toString() },
-		forceTransform,
-	);
-	code = `import ${name} from "solid-start-${name}";\n` + code;
-	code = code.replace(`"${sym}"`, `${name}({})`);
-	await writeFile("vite.config.ts", code);
 };

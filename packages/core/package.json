@@ -26,7 +26,6 @@
 		"@clack/prompts": "0.7.0",
 		"@nirtamir-cli/commands": "workspace:*",
 		"@nirtamir-cli/reactivity": "workspace:*",
-		"@nirtamir-cli/swc-plugin-nirtamir-cli": "workspace:*",
 		"@nirtamir-cli/ui": "workspace:*",
 		"@nirtamir-cli/utils": "workspace:*",
 		"@swc/core": "^1.4.0",

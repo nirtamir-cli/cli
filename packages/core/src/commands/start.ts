@@ -1,29 +1,7 @@
 import { command, flag, optional, positional, string, subcommands } from "cmd-ts";
-import { oneOf } from "@nirtamir-cli/utils";
-import { t } from "@nirtamir-cli/utils";
-import {
-	handleAdapter,
-	handleApi,
-	handleData,
-	handleMode,
-	handleRoute,
-	supportedAdapters,
-	supportedModes,
-} from "@nirtamir-cli/commands";
+import { oneOf, t } from "@nirtamir-cli/utils";
+import { handleAdapter, handleApi, handleData, handleRoute, supportedAdapters } from "@nirtamir-cli/commands";
 
-const mode = command({
-	name: "mode",
-	args: {
-		mode: positional({
-			type: optional(oneOf(supportedModes)),
-			displayName: "Mode",
-			description: t.START_MODE_DESC,
-		}),
-	},
-	async handler({ mode }) {
-		await handleMode(mode);
-	},
-});
 const route = command({
 	name: "route",
 	args: {
@@ -85,7 +63,6 @@ export const startCommands = subcommands({
 	name: "start",
 	description: "Commands specific to solid start",
 	cmds: {
-		mode,
 		route,
 		data,
 		adapter,

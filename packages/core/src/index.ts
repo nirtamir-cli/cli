@@ -13,7 +13,6 @@ import {
 	handleAdd,
 	handleApi,
 	handleData,
-	handleMode,
 	handleNew,
 	handleRoute,
 } from "@nirtamir-cli/commands";
@@ -28,7 +27,6 @@ export const provideStartSuggestions = async () => {
 	let startAction = await p.select({
 		message: t.SELECT_START_ACTION,
 		options: [
-			{ value: "mode", label: t.START_MODE, hint: t.START_MODE_HINT },
 			{ value: "route", label: t.START_ROUTE, hint: t.START_ROUTE_HINT },
 			{ value: "data", label: t.START_DATA, hint: t.START_DATA_HINT },
 			{
@@ -44,9 +42,6 @@ export const provideStartSuggestions = async () => {
 		],
 	});
 	switch (startAction) {
-		case "mode":
-			await handleMode();
-			break;
 		case "route":
 			await handleRoute();
 			break;
