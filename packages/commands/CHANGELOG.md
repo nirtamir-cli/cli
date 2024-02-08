@@ -1,5 +1,14 @@
 # @nirtamir-cli/commands
 
+## 0.0.14
+
+### Patch Changes
+
+- Remove detect package manager
+- Updated dependencies
+  - @nirtamir-cli/utils@0.0.13
+  - @nirtamir-cli/ui@0.0.12
+
 ## 0.0.13
 
 ### Patch Changes

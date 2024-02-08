@@ -93,7 +93,7 @@ export const flushFileUpdates = async () => {
 };
 export const flushPackageUpdates = async () => {
 	const packageUpdates = UPDATESQUEUE.filter((u) => u.type === "package") as PackageUpdate[];
-	const pM = await detectPackageManager();
+	const pM = detectPackageManager();
 	const instlCmd = getInstallCommand(pM);
 	for (const update of packageUpdates) {
 		await $`${pM} ${instlCmd} ${update.name}`;
@@ -102,7 +102,7 @@ export const flushPackageUpdates = async () => {
 
 export const flushDevPackageUpdates = async () => {
 	const packageUpdates = UPDATESQUEUE.filter((u) => u.type === "dev-package") as PackageUpdate[];
-	const pM = await detectPackageManager();
+	const pM = detectPackageManager();
 	const instlCmd = getInstallCommand(pM);
 	const devFlag = "-D";
 	for (const update of packageUpdates) {

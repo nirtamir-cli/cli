@@ -33,7 +33,7 @@ export const integrations = {
 	// "tailwind": {
 	// 	installs: ["tailwindcss", "postcss", "autoprefixer"],
 	// 	postInstall: async () => {
-	// 		const pM = await detectPackageManager();
+	// 		const pM = detectPackageManager();
 	// 		await $`${getRunnerCommand(pM)} tailwindcss init -p`;
 	// 		let tailwindConfig = "tailwind.config.js";
 	// 		if (!fileExists(tailwindConfig)) {
@@ -255,7 +255,7 @@ npx jira-prepare-commit-msg $1
 		// 	prepare: "husky",
 		// },
 		postInstall: async () => {
-			const pM = await detectPackageManager();
+			const pM = detectPackageManager();
 			await $`${getRunnerCommand(pM)} husky init`;
 
 			if (!fileExists(".husky/pre-commit")) {
