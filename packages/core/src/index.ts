@@ -102,4 +102,5 @@ const main = async () => {
 
 	await run(cli, args);
 };
-main();
+
+main().catch(console.error);
