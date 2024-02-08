@@ -1,6 +1,6 @@
 {
 	"name": "@nirtamir-cli/utils",
-	"version": "0.0.13",
+	"version": "0.0.14",
 	"description": "A collection of utilities for the Solid CLI",
 	"license": "MIT",
 	"homepage": "https://cli.nirtamir.com",

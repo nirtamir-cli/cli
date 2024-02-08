@@ -154,14 +154,13 @@ const combineMerge = (target: Array<any>, source: Array<object>, options: deepme
 export const flushTSConfigAdditions = async () => {
 	const tsConfigUpdates = UPDATESQUEUE.filter((u) => u.type === "tsconfig") as TSConfigUpdate[];
 
-	const tsConfigFileName = "tsconfig.json";
-	const tsconfig = getTsconfig(tsConfigFileName) ?? {};
+	const { config = {}, path = "tsconfig" } = getTsconfig() ?? {};
 
-	const result = deepmerge.all([tsconfig, ...tsConfigUpdates.map((update) => update.tsconfig)], {
+	const result = deepmerge.all([config, ...tsConfigUpdates.map((update) => update.tsconfig)], {
 		arrayMerge: combineMerge,
 	});
 
-	await writeFile(tsConfigFileName, JSON.stringify(result, null, 2));
+	await writeFile(path, JSON.stringify(result, null, 2));
 };
 export const flushUpdatePackageJson = async () => {
 	const packageJsonUpdates = UPDATESQUEUE.filter((u) => u.type === "package-json") as PackageJsonUpdate[];

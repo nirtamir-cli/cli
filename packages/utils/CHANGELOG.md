@@ -1,5 +1,11 @@
 # @nirtamir-cli/utils
 
+## 0.0.14
+
+### Patch Changes
+
+- Fix tsconfig
+
 ## 0.0.13
 
 ### Patch Changes
