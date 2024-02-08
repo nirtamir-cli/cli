@@ -3,7 +3,8 @@ import { $ } from "execa";
 import { detectPackageManager, getInstallCommand } from "../package-manager";
 import { readFile } from "../fs";
 import deepmerge from "deepmerge";
-import type { PackageJson, TsConfigJson} from "type-fest";
+import type { PackageJson, TsConfigJson } from "type-fest";
+import { getTsconfig } from "get-tsconfig";
 
 declare global {
 	var UPDATESQUEUE: Update[] | undefined;
@@ -154,8 +155,7 @@ export const flushTSConfigAdditions = async () => {
 	const tsConfigUpdates = UPDATESQUEUE.filter((u) => u.type === "tsconfig") as TSConfigUpdate[];
 
 	const tsConfigFileName = "tsconfig.json";
-	const tsConfigJsonStr = (await readFile(tsConfigFileName)).toString();
-	const tsconfig = JSON.parse(tsConfigJsonStr) as TsConfigJson;
+	const tsconfig = getTsconfig(tsConfigFileName) ?? {};
 
 	const result = deepmerge.all([tsconfig, ...tsConfigUpdates.map((update) => update.tsconfig)], {
 		arrayMerge: combineMerge,
