@@ -1,18 +1,8 @@
 // Taken almost verbatim from https://github.com/solidjs/solid-start/blob/f351f42ba8566cbfa72b483dd63d4debcb386230/packages/create-app/cli/index.js#L62C1-L80C2
-export const detectPackageManager = () => {
-	// This environment variable is set by npm and yarn but pnpm seems less consistent
-	const userAgent = process.env.npm_config_user_agent || "";
+import { detect } from "detect-package-manager";
 
-	switch (true) {
-		case userAgent.startsWith("yarn"):
-			return "yarn";
-		case userAgent.startsWith("pnpm"):
-			return "pnpm";
-		case userAgent.startsWith("bun"):
-			return "bun";
-		default:
-			return "npm";
-	}
+export const detectPackageManager = async () => {
+	return await detect()
 };
 
 export const getInstallCommand = (packageManager: PackageManager): string => {
@@ -41,4 +31,4 @@ export const getRunnerCommand = (packageManager: PackageManager) => {
 	}
 };
 
-export type PackageManager = ReturnType<typeof detectPackageManager>;
+export type PackageManager = Awaited<ReturnType<typeof detectPackageManager>>;
