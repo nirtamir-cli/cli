@@ -283,7 +283,22 @@ pnpm lint-staged`,
 			if (!fileExists("next.config.js")) {
 				p.log.error(color.red(`Can't find next.config.js file`));
 			}
-			await insertAtBeginning("next.config.js", `import createJiti from "jiti";`);
+			writeFile(
+				".env.local",
+				`DATABASE_URL="DATABASE_URL"
+NEXT_PUBLIC_PUBLISHABLE_KEY="NEXT_PUBLIC_PUBLISHABLE_KEY"`,
+			);
+			writeFile(
+				".env.example",
+				`DATABASE_URL=
+NEXT_PUBLIC_PUBLISHABLE_KEY=`,
+			);
+
+			await insertAtBeginning(
+				"next.config.js",
+				`import createJiti from "jiti";
+			`,
+			);
 			await insertBefore(
 				"next.config.js",
 				"/** @type {import('next').NextConfig} */",
@@ -298,27 +313,37 @@ jiti("./src/env");
 				"src/env.ts",
 				`import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
- 
+
 export const env = createEnv({
-  server: {
-    DATABASE_URL: z.string().url(),
-    OPEN_AI_API_KEY: z.string().min(1),
-  },
-  client: {
-    NEXT_PUBLIC_PUBLISHABLE_KEY: z.string().min(1),
-  },
-  // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
-  runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
-    OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
-    NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
-  },
-  // For Next.js >= 13.4.4, you only need to destructure client variables:
-  // experimental__runtimeEnv: {
-  //   NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
-  // }
-});`,
+\tserver: {
+\t\tDATABASE_URL: z.string().url(),
+\t\tOPEN_AI_API_KEY: z.string().min(1),
+\t\t// ONLY_BOOLEAN: z
+\t\t// \t.string()
+\t\t// \t// only allow "true" or "false"
+\t\t// \t.refine((s) => s === "true" || s === "false")
+\t\t// \t// transform to boolean
+\t\t// \t.transform((s) => s === "true"),
+\t\t// ZOD_NUMBER_COERCION: z.coerce.number(),
+\t},
+\tclient: {
+\t\tNEXT_PUBLIC_PUBLISHABLE_KEY: z.string().min(1),
+\t},
+\t// If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
+\truntimeEnv: {
+\t\tDATABASE_URL: process.env.DATABASE_URL,
+\t\tOPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
+\t\tNEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
+\t},
+\t// For Next.js >= 13.4.4, you only need to destructure client variables:
+\t// experimental__runtimeEnv: {
+\t//   NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
+\t// }
+});
+`,
 			);
+
+			await flushQueue();
 		},
 	},
 
