@@ -29,6 +29,16 @@ export type Integrations = Record<Supported, IntegrationsValue>;
 
 export const [rootFile, setRootFile] = createSignal<string | undefined>(undefined);
 
+async function getNextConfigFilePath() {
+	const nextjsConfigFileNames = ["next.config.js", "next.config.mjs"];
+	for (const path of nextjsConfigFileNames) {
+		if (fileExists(path)) {
+			return path;
+		}
+	}
+	return null;
+}
+
 export const integrations = {
 	// "tailwind": {
 	// 	installs: ["tailwindcss", "postcss", "autoprefixer"],
@@ -261,6 +271,7 @@ npx jira-prepare-commit-msg $1
 
 			if (!fileExists(".husky/pre-commit")) {
 				p.log.error(color.red(`Can't find precommit file`));
+				return;
 			}
 			await insertAtEnd(
 				".husky/pre-commit",
@@ -280,8 +291,10 @@ pnpm lint-staged`,
 	"t3-env-next": {
 		installs: ["@t3-oss/env-nextjs", "zod", "jiti"],
 		postInstall: async () => {
-			if (!fileExists("next.config.js")) {
-				p.log.error(color.red(`Can't find next.config.js file`));
+			const nextConfigFilePath = await getNextConfigFilePath();
+			if (nextConfigFilePath == null) {
+				p.log.error(color.red(`Can't find next.config.js / next.config.mjs file`));
+				return;
 			}
 			writeFile(
 				".env.local",
@@ -295,12 +308,12 @@ NEXT_PUBLIC_PUBLISHABLE_KEY=`,
 			);
 
 			await insertAtBeginning(
-				"next.config.js",
+				nextConfigFilePath,
 				`import createJiti from "jiti";
 			`,
 			);
 			await insertBefore(
-				"next.config.js",
+				nextConfigFilePath,
 				"/** @type {import('next').NextConfig} */",
 				`const jiti = createJiti(new URL(import.meta.url).pathname);
  

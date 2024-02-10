@@ -1,5 +1,11 @@
 # @nirtamir-cli/commands
 
+## 0.0.17
+
+### Patch Changes
+
+- Support multiple next.js config file names
+
 ## 0.0.16
 
 ### Patch Changes
