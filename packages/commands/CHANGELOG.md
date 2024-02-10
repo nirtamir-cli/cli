@@ -1,5 +1,11 @@
 # @nirtamir-cli/commands
 
+## 0.0.16
+
+### Patch Changes
+
+- server-only and t3-env
+
 ## 0.0.15
 
 ### Patch Changes

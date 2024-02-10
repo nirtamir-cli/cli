@@ -1,5 +1,12 @@
 # @nirtamir-cli/core
 
+## 0.0.25
+
+### Patch Changes
+
+- Updated dependencies
+  - @nirtamir-cli/commands@0.0.16
+
 ## 0.0.24
 
 ### Patch Changes
