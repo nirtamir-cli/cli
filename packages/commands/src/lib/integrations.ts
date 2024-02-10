@@ -280,6 +280,9 @@ pnpm lint-staged`,
 	"t3-env-next": {
 		installs: ["@t3-oss/env-nextjs", "zod", "jiti"],
 		postInstall: async () => {
+			if (!fileExists("next.config.js")) {
+				p.log.error(color.red(`Can't find next.config.js file`));
+			}
 			await insertAtBeginning("next.config.js", `import createJiti from "jiti";`);
 			await insertBefore(
 				"next.config.js",
