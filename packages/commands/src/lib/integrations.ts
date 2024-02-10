@@ -100,6 +100,7 @@ export const integrations = {
   tailwindConfig: "./tailwind.config.ts",
   // @see https://github.com/trivago/prettier-plugin-sort-imports
   importOrder: [
+    "^server-only$",
     "^react$",
     "<THIRD_PARTY_MODULES>",
     // Internal modules
