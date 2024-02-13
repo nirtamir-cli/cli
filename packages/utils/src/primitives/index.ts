@@ -28,6 +28,8 @@ const fetchPrimitives = async () => {
 		{ label: "immer", value: "immer", group: "primitives" },
 		{ label: "react-hook-form", value: "react-hook-form", group: "primitives" },
 		{ label: "react-use", value: "react-use", group: "primitives" },
+		{ label: "@tailwindcss/container-queries", value: "@tailwindcss/container-queries", group: "tailwindcss" },
+		{ label: "tailwind-animate", value: "tailwind-animate", group: "tailwindcss" },
 	];
 
 	return primitives;
