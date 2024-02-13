@@ -1,5 +1,11 @@
 # @nirtamir-cli/commands
 
+## 0.0.18
+
+### Patch Changes
+
+- dix publish
+
 ## 0.0.17
 
 ### Patch Changes
