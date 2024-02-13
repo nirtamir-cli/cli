@@ -95,7 +95,7 @@ export const integrations = {
 			"prettier-plugin-packagejson",
 		],
 		scripts: {
-			format: 'prettier "**/*" --write --ignore-unknown',
+			format: 'prettier "**/*" --write --ignore-unknown --log-level silent',
 		},
 		additionalConfig: async () => {
 			writeFile(
