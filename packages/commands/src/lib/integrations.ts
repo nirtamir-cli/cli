@@ -87,6 +87,49 @@ export const integrations = {
 	// 		await flushQueue();
 	// 	},
 	// },
+	"svg-icons-cli": {
+		devInstalls: ["svg-icons-cli"],
+		tsconfig: {
+			includes: ["icon-name.d.ts"],
+			paths: {
+				"@icon/icon-name": ["./src/ui/icons/icon-name.d.ts"],
+			},
+		},
+		scripts: {
+			"build:icons": "icons build -i ./src/assets/icons -o ./src/components/ui/icons -s ./public/icons",
+		},
+		additionalConfig: async () => {
+			writeFile(
+				"./src/components/ui/icons/Icon.tsx",
+				`import type { SVGProps } from "react";
+// Configure this path in your tsconfig.json
+import type { IconName } from "@/components/ui/icons/name";
+
+// Be sure to configure the icon generator to output to the public folder
+const href = "/icons/sprite.svg";
+
+// eslint-disable-next-line import/no-unused-modules
+export { href };
+
+export function Icon({
+  name,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  name: IconName;
+}) {
+  return (
+    <svg {...props}>
+      <use href={\`$\{href}#$\{name}\`} />
+    </svg>
+  );
+}
+
+// eslint-disable-next-line import/no-unused-modules
+export { type IconName } from "@/components/ui/icons/name";
+`,
+			);
+		},
+	},
 	"prettier": {
 		devInstalls: [
 			"prettier",
