@@ -186,7 +186,8 @@ export { type IconName } from "@/components/ui/icons/name";
 		additionalConfig: async () => {
 			writeFile(
 				".eslintrc.cjs",
-				`module.exports = {
+				`/** @type {import("@types/eslint").Linter.Config} */
+module.exports = {
   root: true,
   settings: {
     // next: {
@@ -205,6 +206,7 @@ export { type IconName } from "@/components/ui/icons/name";
     "nirtamir2/recommended",
     "nirtamir2/typescript",
     "nirtamir2/react",
+    // "nirtamir2/astro",
     // "nirtamir2/query",
     // "nirtamir2/solid",
     // "nirtamir2/security",
