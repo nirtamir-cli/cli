@@ -90,9 +90,11 @@ export const integrations = {
 	"svg-icons-cli": {
 		devInstalls: ["svg-icons-cli"],
 		tsconfig: {
-			includes: ["icon-name.d.ts"],
-			paths: {
-				"@icon/icon-name": ["./src/ui/icons/icon-name.d.ts"],
+			include: ["icon-name.d.ts"],
+			compilerOptions: {
+				paths: {
+					"@icon/icon-name": ["./src/ui/icons/icon-name.d.ts"],
+				},
 			},
 		},
 		scripts: {
@@ -128,6 +130,23 @@ export function Icon({
 export { type IconName } from "@/components/ui/icons/name";
 `,
 			);
+		},
+	},
+	"prettier-astro": {
+		devInstalls: ["prettier-plugin-astro"],
+		additionalConfig: async () => {
+			await insertAfter(
+				".prettierrc.mjs",
+				"overrides: [",
+				`\n{
+        files: "*.astro",
+        options: {
+          parser: "astro",
+        },
+      },\n`,
+			);
+			await insertAfter(".prettierrc.mjs", "plugins: [", '\n"prettier-plugin-astro",\n');
+			await flushQueue();
 		},
 	},
 	"prettier": {
@@ -238,32 +257,32 @@ module.exports = {
 			extends: "@tsconfig/strictest/tsconfig.json",
 		},
 	},
-	"typescript-astro":{
+	"typescript-astro": {
 		installs: ["@astrojs/ts-plugin"],
 		scripts: {
-			"type-check": "astro check && tsc --pretty --noEmit"
+			"type-check": "astro check && tsc --pretty --noEmit",
 		},
 		tsconfig: {
 			extends: "@tsconfig/strictest/tsconfig.json",
 			compilerOptions: {
-				"verbatimModuleSyntax": true,
-				"plugins": [
+				verbatimModuleSyntax: true,
+				plugins: [
 					{
-						"name": "@astrojs/ts-plugin"
-					}
+						name: "@astrojs/ts-plugin",
+					},
 				],
-				"baseUrl": ".",
-				"paths": {
+				baseUrl: ".",
+				paths: {
 					"@components/*": ["src/components/*"],
-					"@layouts/*": ["src/layouts/*"]
-				}
-			}
+					"@layouts/*": ["src/layouts/*"],
+				},
+			},
 		},
 	},
 	"ts-reset": {
 		devInstalls: ["@total-typescript/ts-reset"],
 		tsconfig: {
-			includes: ["reset.d.ts"],
+			include: ["reset.d.ts"],
 		},
 		additionalConfig: async () => {
 			writeFile("reset.d.ts", `import "@total-typescript/ts-reset";`);
@@ -464,4 +483,4 @@ export const env = createEnv({
 	// 		await insertAtBeginning(path, `import "solid-devtools";\n`);
 	// 	},
 	// },
-};
+} satisfies Record<string, IntegrationsValue>;
