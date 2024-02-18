@@ -1,5 +1,14 @@
 # @nirtamir-cli/commands
 
+## 0.0.19
+
+### Patch Changes
+
+- Astro
+- Updated dependencies
+  - @nirtamir-cli/utils@0.0.15
+  - @nirtamir-cli/ui@0.0.14
+
 ## 0.0.18
 
 ### Patch Changes

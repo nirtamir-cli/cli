@@ -1,6 +1,6 @@
 {
 	"name": "@nirtamir-cli/core",
-	"version": "0.0.27",
+	"version": "0.0.28",
 	"description": "A CLI for Solid",
 	"author": "Thomas Beer & Rahul Batra",
 	"license": "MIT",
