@@ -270,7 +270,7 @@ module.exports = {
 			"type-check": "astro check && tsc --pretty --noEmit",
 		},
 		tsconfig: {
-			extends: "@tsconfig/strictest/tsconfig.json",
+			extends: "astro/tsconfigs/strictest",
 			compilerOptions: {
 				verbatimModuleSyntax: true,
 				plugins: [
@@ -284,6 +284,7 @@ module.exports = {
 					"@layouts/*": ["src/layouts/*"],
 				},
 			},
+			"exclude": ["dist"],
 		},
 	},
 	"ts-reset": {
