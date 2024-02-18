@@ -138,14 +138,21 @@ export { type IconName } from "@/components/ui/icons/name";
 			await insertAfter(
 				".prettierrc.mjs",
 				"overrides: [",
-				`\n{
+				`
+     {
         files: "*.astro",
         options: {
           parser: "astro",
         },
-      },\n`,
+     },`,
 			);
-			await insertAfter(".prettierrc.mjs", "plugins: [", '\n"prettier-plugin-astro",\n');
+			await insertAfter(
+				".prettierrc.mjs",
+				"plugins: [",
+				`
+    "prettier-plugin-astro",
+    `,
+			);
 			await flushQueue();
 		},
 	},
