@@ -238,6 +238,28 @@ module.exports = {
 			extends: "@tsconfig/strictest/tsconfig.json",
 		},
 	},
+	"typescript-astro":{
+		installs: ["@astrojs/ts-plugin"],
+		scripts: {
+			"type-check": "astro check && tsc --pretty --noEmit"
+		},
+		tsconfig: {
+			extends: "@tsconfig/strictest/tsconfig.json",
+			compilerOptions: {
+				"verbatimModuleSyntax": true,
+				"plugins": [
+					{
+						"name": "@astrojs/ts-plugin"
+					}
+				],
+				"baseUrl": ".",
+				"paths": {
+					"@components/*": ["src/components/*"],
+					"@layouts/*": ["src/layouts/*"]
+				}
+			}
+		},
+	},
 	"ts-reset": {
 		devInstalls: ["@total-typescript/ts-reset"],
 		tsconfig: {
