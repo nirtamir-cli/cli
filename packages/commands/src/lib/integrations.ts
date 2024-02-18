@@ -1,4 +1,11 @@
-import { insertAfter, insertAtBeginning, insertAtEnd, insertBefore, writeFile } from "@nirtamir-cli/utils/fs";
+import {
+	insertAfter,
+	insertAtBeginning,
+	insertAtEnd,
+	insertBefore,
+	replaceString,
+	writeFile,
+} from "@nirtamir-cli/utils/fs";
 import { fileExists, validateFilePath } from "./utils/helpers";
 import { $ } from "execa";
 import { getRunnerCommand, detectPackageManager } from "@nirtamir-cli/utils/package-manager";
@@ -284,7 +291,7 @@ module.exports = {
 					"@layouts/*": ["src/layouts/*"],
 				},
 			},
-			"exclude": ["dist"],
+			exclude: ["dist"],
 		},
 	},
 	"ts-reset": {
@@ -380,6 +387,33 @@ pnpm lint-staged`,
 				"*.{ts,tsx,md}": "eslint --cache --fix",
 				"*.{ts,tsx,css,html,svg,md,json,js}": "prettier --write",
 			},
+		},
+	},
+	"next-bundle-analyze": {
+		scripts: {
+			"bundle-analyze": "BUNDLE_ANALYZE=true pnpm run build",
+		},
+		installs: ["@next/bundle-analyzer"],
+		additionalConfig: async () => {
+			const nextConfigFilePath = await getNextConfigFilePath();
+			if (nextConfigFilePath == null) {
+				p.log.error(color.red(`Can't find next.config.js / next.config.mjs file`));
+				return;
+			}
+			await insertAtBeginning(nextConfigFilePath, 'import nextBundleAnalyzer from "@next/bundle-analyzer";\n');
+			await insertBefore(
+				nextConfigFilePath,
+				"\n/** @type {import('next').NextConfig} */",
+				`const withBundleAnalyzer = nextBundleAnalyzer({
+  enabled: process.env["BUNDLE_ANALYZE"] === "true",
+});`,
+			);
+			await replaceString(
+				nextConfigFilePath,
+				"export default nextConfig;",
+				"export default withBundleAnalyzer(nextConfig);",
+			);
+			await flushQueue();
 		},
 	},
 	"t3-env-next": {
