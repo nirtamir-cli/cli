@@ -47,6 +47,94 @@ async function getNextConfigFilePath() {
 }
 
 export const integrations = {
+	"storybook": {
+		devInstalls: [
+			"@storybook/addon-a11y",
+			"@storybook/addon-essentials",
+			"@storybook/addon-interactions",
+			"@storybook/addon-links",
+			"@storybook/addon-storysource",
+			"@storybook/blocks",
+			"@storybook/nextjs",
+			"@storybook/react",
+			"@storybook/test",
+			"tsconfig-paths-webpack-plugin",
+			"storybook",
+		],
+		scripts: {
+			"build-storybook": "storybook build",
+			"storybook": "storybook dev",
+		},
+		additionalConfig: async () => {
+			writeFile(
+				"./storybook/preview.tsx",
+				`import type { Preview } from "@storybook/react";
+import { fonts } from "../src/app/fonts";
+import "../src/app/globals.css";
+
+const preview: Preview = {
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <main className={fonts.className}>
+        <Story />
+      </main>
+    ),
+  ],
+};
+
+export default preview;
+`,
+			);
+			writeFile(
+				"./storybook/main.ts",
+				`import type { StorybookConfig } from "@storybook/nextjs";
+import { resolve } from "node:path";
+import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
+
+const config: StorybookConfig = {
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/test",
+    "@storybook/addon-storysource",
+    "@storybook/addon-a11y",
+  ],
+  framework: {
+    name: "@storybook/nextjs",
+    options: {},
+  },
+  webpackFinal: (config) => {
+    config.resolve.plugins = config.resolve.plugins || [];
+    config.resolve.plugins.push(
+      new TsconfigPathsPlugin({
+        configFile: resolve(__dirname, "../tsconfig.json"),
+      }),
+    );
+
+    return config;
+  },
+  docs: {
+    autodocs: "tag",
+  },
+};
+
+export default config;
+`,
+			);
+
+			await flushQueue();
+		},
+	},
 	// "tailwind": {
 	// 	installs: ["tailwindcss", "postcss", "autoprefixer"],
 	// 	postInstall: async () => {
