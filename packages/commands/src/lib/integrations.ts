@@ -193,7 +193,7 @@ export default config;
 			},
 		},
 		scripts: {
-			"build:icons": "icons build -i ./src/assets/icons -o ./src/components/ui/icons -s ./public/icons",
+			"build:icons": "icons build -i ./src/assets/icons -o ./src/components/ui/icons -s ./public/icons --optimize",
 		},
 		additionalConfig: async () => {
 			writeFile(
