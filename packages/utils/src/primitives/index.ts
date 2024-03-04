@@ -20,6 +20,7 @@ const fetchPrimitives = async () => {
 
 	const primitives: Option[] = [
 		{ label: "ts-extras", value: "ts-extras", group: "primitives" },
+		{ label: "ts-pattern", value: "ts-pattern", group: "primitives" },
 		{ label: "zod", value: "zod", group: "primitives" },
 		{ label: "clsx", value: "clsx", group: "primitives" },
 		{ label: "nanoid", value: "nanoid", group: "primitives" },
