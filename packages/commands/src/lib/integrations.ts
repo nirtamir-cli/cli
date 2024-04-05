@@ -545,6 +545,7 @@ import { z } from "zod";
 
 export const env = createEnv({
 \tserver: {
+\t\tNODE_ENV: z.enum(["development", "test", "production"]),
 \t\tDATABASE_URL: z.string().url(),
 \t\tOPEN_AI_API_KEY: z.string().min(1),
 \t\t// ONLY_BOOLEAN: z
@@ -560,6 +561,7 @@ export const env = createEnv({
 \t},
 \t// If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
 \truntimeEnv: {
+\t\tNODE_ENV: process.env.NODE_ENV,
 \t\tDATABASE_URL: process.env.DATABASE_URL,
 \t\tOPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
 \t\tNEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
