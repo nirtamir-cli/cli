@@ -31,7 +31,8 @@ const fetchPrimitives = async () => {
 		{ label: "react-hook-form", value: "react-hook-form", group: "primitives" },
 		{ label: "react-use", value: "react-use", group: "primitives" },
 		{ label: "@tailwindcss/container-queries", value: "@tailwindcss/container-queries", group: "tailwindcss" },
-		{ label: "tailwind-animate", value: "tailwind-animate", group: "tailwindcss" },
+		{ label: "tailwindcss-animate", value: "tailwindcss-animate", group: "tailwindcss" },
+		{ label: "tailwindcss-signals", value: "tailwindcss-signals", group: "tailwindcss" },
 	];
 
 	return primitives;
