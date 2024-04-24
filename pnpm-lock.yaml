@@ -194,6 +194,9 @@ importers:
       '@nirtamir-cli/reactivity':
         specifier: workspace:*
         version: link:../reactivity
+      '@skarab/detect-package-manager':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@swc/core':
         specifier: ^1.4.0
         version: 1.5.0
@@ -748,6 +751,10 @@ packages:
 
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+
+  '@skarab/detect-package-manager@1.0.0':
+    resolution: {integrity: sha512-CuU1x6LgkJIF+H8FCnKijx6DbWVP1Y7kqPk88LSxNe0ulbe3BZ37qd3AaX3t5vnFZESLFMcjQd2dlPhdvWNSdQ==}
+    engines: {node: '>=14', pnpm: '>=7'}
 
   '@swc/core-darwin-arm64@1.5.0':
     resolution: {integrity: sha512-dyA25zQjm3xmMFsRPFgBpSqWSW9TITnkndZkZAiPYLjBxH9oTNMa0l09BePsaqEeXySY++tUgAeYu/9onsHLbg==}
@@ -2901,6 +2908,8 @@ snapshots:
     optional: true
 
   '@sinclair/typebox@0.27.8': {}
+
+  '@skarab/detect-package-manager@1.0.0': {}
 
   '@swc/core-darwin-arm64@1.5.0':
     optional: true

@@ -1,6 +1,6 @@
 {
 	"name": "@nirtamir-cli/reactivity",
-	"version": "0.0.13",
+	"version": "0.1.0",
 	"description": "The minimal, eager reactive system that powers the Solid CLI",
 	"license": "MIT",
 	"homepage": "https://cli.nirtamir.com",

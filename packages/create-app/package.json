@@ -1,6 +1,6 @@
 {
 	"name": "@nirtamir-cli/create-app",
-	"version": "0.0.18",
+	"version": "0.1.0",
 	"description": "A stripped down Nir Tamir's CLI just for creating new projects",
 	"author": "Nir Tamir",
 	"license": "MIT",

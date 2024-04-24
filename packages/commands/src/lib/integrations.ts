@@ -455,7 +455,7 @@ npx jira-prepare-commit-msg $1
 		// 	prepare: "husky",
 		// },
 		postInstall: async () => {
-			const pM = detectPackageManager();
+			const pM = await detectPackageManager();
 			await $`${getRunnerCommand(pM)} husky init`;
 
 			if (!fileExists(".husky/pre-commit")) {

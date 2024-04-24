@@ -1,5 +1,18 @@
 # @nirtamir-cli/commands
 
+## 0.1.0
+
+### Minor Changes
+
+- f38dce0: pnpm 9
+
+### Patch Changes
+
+- Updated dependencies [f38dce0]
+  - @nirtamir-cli/utils@0.1.0
+  - @nirtamir-cli/reactivity@0.1.0
+  - @nirtamir-cli/ui@0.1.0
+
 ## 0.0.19
 
 ### Patch Changes
