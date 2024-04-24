@@ -506,6 +506,10 @@ pnpm lint-staged`,
 	},
 	"t3-env-next": {
 		installs: ["@t3-oss/env-nextjs", "zod", "jiti"],
+		devInstalls: ["sync-dotenv"],
+		scripts: {
+			"sync-env": "sync-dotenv --env .env.local",
+		},
 		postInstall: async () => {
 			const nextConfigFilePath = await getNextConfigFilePath();
 			if (nextConfigFilePath == null) {
