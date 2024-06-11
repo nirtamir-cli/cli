@@ -7,7 +7,7 @@ import {
 	writeFile,
 } from "@nirtamir-cli/utils/fs";
 import { fileExists, validateFilePath } from "./utils/helpers";
-import { $ } from "execa";
+import { $, execa } from "execa";
 import { getRunnerCommand, detectPackageManager } from "@nirtamir-cli/utils/package-manager";
 import { createSignal } from "@nirtamir-cli/reactivity";
 import * as p from "@clack/prompts";
@@ -300,49 +300,10 @@ export { type IconName } from "@/components/ui/icons/name";
 		},
 	},
 	"eslint": {
-		devInstalls: ["eslint", "eslint-config-nirtamir2"],
-		scripts: {
-			lint: 'eslint --fix "./src/**/*.{ts,tsx,js,jsx}"',
-		},
-		additionalConfig: async () => {
-			writeFile(
-				".eslintrc.cjs",
-				`/** @type {import("@types/eslint").Linter.Config} */
-module.exports = {
-  root: true,
-  settings: {
-    // next: {
-    //   rootDir: "src",
-    // },
-    react: {
-      version: "detect",
-    },
-  },
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: true,
-  },
-  extends: [
-    "nirtamir2",
-    "nirtamir2/recommended",
-    "nirtamir2/typescript",
-    "nirtamir2/react",
-    // "nirtamir2/astro",
-    // "nirtamir2/query",
-    // "nirtamir2/solid",
-    // "nirtamir2/security",
-    // "nirtamir2/compat",
-    // "nirtamir2/jest",
-    // "nirtamir2/storybook",
-    // "nirtamir2/i18n",
-    // "nirtamir2/query",
-    "nirtamir2/tailwindcss",
-    "nirtamir2/next", // should be after recommended react and typescript
-  ],
-  rules: {},
-};
-`,
-			);
+		devInstalls: ["eslint", "@nirtamir2/eslint-config"],
+		postInstall: async () => {
+			const pM = await detectPackageManager();
+			await $`${getRunnerCommand(pM)} @nirtamir2/eslint-config`;
 		},
 	},
 	"ci": {
